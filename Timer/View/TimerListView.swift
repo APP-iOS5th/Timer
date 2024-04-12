@@ -29,7 +29,6 @@ struct TimerListView: View {
                         } label: {
                             TimerCell(timer.time)
                         }
-
                     }
                 }
             }

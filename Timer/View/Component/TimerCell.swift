@@ -27,7 +27,7 @@ struct TimerCell: View {
             Circle()
                 .rotation(.degrees(-90))
                 .foregroundStyle(Color.deepGray)
-                .padding(20)
+                .padding(15)
             InitialTimeLabel(time: totalTime)
         }
         .frame(width: 150, height: 150)

@@ -20,6 +20,6 @@ final class TimerListViewModel {
     
     // MARK: Actions and Reduces
     // TODO: Add methods for appending, removing timer information.
-    
+//    func append(with timerInfo: TimerInfo) {}
     
 }
