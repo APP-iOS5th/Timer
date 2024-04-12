@@ -50,6 +50,7 @@ struct ContentView: View {
     @State private var runString = "시작"
     @State private var pauseString = "정지"
     @State private var resetString = "리셋"
+    var maxMinute  = 20
     
     //타이머 함수 1초마다 이벤트를 발생시킨다
     let timer = Timer.publish(every: 1, on: .main , in: .common).autoconnect()
@@ -63,7 +64,7 @@ struct ContentView: View {
                 
                 Circle()
                 // trim은 시작위치가 오른쪽 90도
-                    .trim(from: 0, to: CGFloat(timeRemaining) / (10 * 60))
+                    .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat((maxMinute * 60)))
                     .stroke(Color.orange, style: StrokeStyle(lineWidth: 15, lineCap: .round))
                     .rotationEffect(.degrees(-90)) // -90도 돌려준다
                 
@@ -74,7 +75,7 @@ struct ContentView: View {
                     
                     HStack(spacing: 30){
                         Button(action: {
-                            if 0 <= timeRemaining && timeRemaining <= 540 {
+                            if 0 <= timeRemaining && timeRemaining <= (maxMinute-1) * 60 {
                                 timeRemaining += 60
                             }
                         }) {
