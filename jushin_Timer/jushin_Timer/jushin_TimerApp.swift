@@ -1,14 +1,14 @@
 //
-//  TimerApp.swift
-//  Timer
+//  jushin_TimerApp.swift
+//  jushin_Timer
 //
-//  Created by Jungman Bae on 4/12/24.
+//  Created by Jay Shin on 4/12/24.
 //
 
 import SwiftUI
 
 @main
-struct TimerApp: App {
+struct jushin_TimerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
