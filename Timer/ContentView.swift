@@ -65,24 +65,46 @@ struct ContentView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 .font(.system(size: 8))
-                .offset(CGSize(width: 42, height: -28))
+                .offset(CGSize(width: 47, height: -28))
                 
                 VStack {
                     Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
                         .font(.system(size: 30, weight: .bold))
                     
                     HStack {
-                        TextField("M", text: $minutesInput)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding(.leading)
-                            .frame(width: 50)
+                        TextField("M", text: Binding(
+                            get: {
+                                return self.minutesInput
+                            },
+                            set: {
+                                if let newValue = Int($0), newValue >= 0 && newValue <= 60 {
+                                    self.minutesInput = "\($0)"
+                                } else {
+                                    self.minutesInput = "0"
+                                }
+                            }
+                        ))
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.leading)
+                        .frame(width: 50)
                         
                         Text(":")
                         
-                        TextField("S", text: $secondsInput)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding(.trailing)
-                            .frame(width: 50)
+                        TextField("S", text: Binding(
+                            get: {
+                                return self.secondsInput
+                            },
+                            set: {
+                                if let newValue = Int($0), newValue >= 0 && newValue <= 60 {
+                                    self.secondsInput = "\($0)"
+                                } else {
+                                    self.secondsInput = "0"
+                                }
+                            }
+                        ))
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.trailing)
+                        .frame(width: 50)
                     }
                     
                     Button {
