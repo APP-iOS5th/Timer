@@ -6,122 +6,238 @@
 //
 
 import SwiftUI
-import AVFoundation
-
-struct AlwaysOnTopView: NSViewRepresentable {
-    let window: NSWindow
-    let isAlwaysOnTop: Bool
-    
-    func makeNSView(context: Context) -> NSView {
-        let view = NSView()
-        return view
-    }
-    
-    func updateNSView(_ nsView: NSView, context: Context) {
-        if isAlwaysOnTop {
-            window.level = .floating
-        } else {
-            window.level = .normal
-        }
-    }
-}
-
-
-class SoundManager {
-    static let instance = SoundManager()
-    var player: AVAudioPlayer?
-    
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "ios_17_radial", withExtension: "mp3") else { return }
-        
-        do {
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.play()
-        } catch let error {
-            print("재생하는데 오류가 발생했습니다. \(error.localizedDescription)")
-        }
-    }
-}
-
 
 struct ContentView: View {
-    @State private var isRunning = false
-    @State private var timeRemaining = 5
+    @State private var isRunning: Bool = false
+    @State private var timeRemaining: Int = 5
     
+    @State private var playSound: Bool = false
+    @State private var isAlwaysOnTop: Bool = true
+    @State private var isMuted: Bool = SoundManager.instance.isMuted
+    @State private var showingSetTimerView = false
+
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
-            ZStack {
-                Circle()
-                    .stroke(Color.gray.opacity(0.2), lineWidth: 10)
-                
-                Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
-                    .stroke(Color.blue, lineWidth: 10)
-                    .rotationEffect(.degrees(-90))
-                
-                VStack {
-                    Button {
-                        switch timeRemaining {
-                        case 0..<180:
-                            timeRemaining = 180
-                        case 180..<300:
-                            timeRemaining = 300
-                        case 300..<420:
-                            timeRemaining = 420
-                        case 300..<600:
-                            timeRemaining = 600
-                        case 600..<900:
-                            timeRemaining = 900
-                        case 900..<1200:
-                            timeRemaining = 1200
-                        case 1200..<1500:
-                            timeRemaining = 1500
-                        case 1500..<1800:
-                            timeRemaining = 1800
-                        default:
-                            timeRemaining = 0
-                        }
-                    } label: {
-                        Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                            .font(.system(size: 20, weight: .bold))
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    Button {
-                        isRunning.toggle()
-                    } label: {
-                        Image(systemName: isRunning ? "pause" : "play.fill")
-                    }
+        ZStack {
+            if playSound {
+                StopSoundButtonView(playSound: $playSound, isRunning: $isRunning, timeRemaining: $timeRemaining)
+            } else {
+                VStack(spacing: 20) {
+                    TimerDisplayView(isRunning: $isRunning, timeRemaining: $timeRemaining)
+//                        .padding(.horizontal)
+                    buttonView
+                }
+                .frame(width: 300)
+                .padding()        
+                .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: isAlwaysOnTop))
+                .onReceive(timer) { _ in
+                    timerTick()
                 }
             }
-                
         }
-        .frame(width: 100, height: 100)
-        .padding()
-        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
-        .onReceive(timer) { _ in
-            if isRunning && timeRemaining > 0 {
-                timeRemaining -= 1
-                if timeRemaining <= 0 {
-                    NSSound.beep()
+        .sheet(isPresented: $showingSetTimerView) {
+            SetTimerView(timeRemaining: $timeRemaining) // 모달로 표시할 뷰
+        }
+    }
+    
+    private var buttonView: some View {
+        VStack(spacing: 15) {
+            HStack(spacing: 10) {
+                // reset tutton
+                Button(action: {
+    //                SoundManager.instance.stopSound()
+    //                playSound = false
+                    isRunning = false
+                    timeRemaining = 0
+                }, label: {
+                    Image(systemName: "arrow.clockwise")
+                })
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                
+                // isAlwaysOnTop button
+                Button(action: {
+                    isAlwaysOnTop.toggle()
+                }, label: {
+                    Image(systemName: isAlwaysOnTop ? "pin.fill" : "pin")
+                })
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                
+                // mute button
+                Button(action: {
+                    SoundManager.instance.toggleMute()
+                    isMuted = SoundManager.instance.isMuted
+                }) {
+                    Image(systemName: isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill")
                 }
-            } else if isRunning {
-                isRunning = false
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                
+                // set timer button
+                Button(action: {
+                    showingSetTimerView = true // 모달 표시
+                }) {
+                    Image(systemName: "gearshape.fill")
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+            }
+            HStack(spacing: 10) {
+                Button(action: {
+                    timeRemaining += 120
+                }, label: {
+                    Text("2")
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
+                })
+                Button(action: {
+                    timeRemaining += 180
+                }, label: {
+                    Text("3")
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
+                })
+                Button(action: {
+                    timeRemaining += 300
+                }, label: {
+                    Text("5")
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
+                })
+                Button(action: {
+                    timeRemaining += 420
+                }, label: {
+                    Text("7")
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
+                })
+                Button(action: {
+                    timeRemaining += 600
+                }, label: {
+                    Text("10")
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
+                })
+            }
+        }
+
+    }
+    
+    private func timerTick() {
+        if isRunning && timeRemaining > 0 {
+            timeRemaining -= 1
+            if timeRemaining == 0 {
+                SoundManager.instance.playSound()
+                playSound = true
+            }
+        } else if isRunning {
+            isRunning = false
+        }
+    }
+}
+
+// MARK: - STOP SOUND BUTTON VIEW
+
+struct StopSoundButtonView: View {
+    @Binding var playSound: Bool
+    @Binding var isRunning: Bool
+    @Binding var timeRemaining: Int
+    
+    @State private var imageIndex = 0
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+
+    var body: some View {
+        Button(action: {
+            // 사운드 재생을 중지하고, 알림 상태를 false로 설정, 타이머 관련 값 초기화
+            SoundManager.instance.stopSound()
+            playSound = false
+            isRunning = false
+            timeRemaining = 0
+        }) {
+            if playSound {
+                Image("party-parrot-page-\(imageIndex)")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+            } else {
+                Image("party-parrot-page-0")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+            }
+        }
+        .buttonStyle(PlainButtonStyle())
+        .onReceive(timer) { _ in
+            if playSound {
+                imageIndex = (imageIndex + 1) % 10 // 0부터 9까지 순환
             }
         }
     }
 }
+
+
+// MARK: - TIMER DISPLAY VIEW
+
+struct TimerDisplayView: View {
+    @Binding var isRunning: Bool
+    @Binding var timeRemaining: Int
+    @State private var imageIndex = 0
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    @State private var showingSetTimerView = false
+
+    var body: some View {
+        VStack {
+            Text(timeString(from: timeRemaining))
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding(.horizontal)
+                .onTapGesture {
+                    showingSetTimerView = true
+                }
+
+            Button(action: {
+                isRunning.toggle()
+            }) {
+                if isRunning {
+                    Image("gaming-cat-page-\(imageIndex)")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                } else {
+                    Image("gaming-cat-page-0")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                }
+            }
+            .scaleEffect(isRunning && timeRemaining > 0 ? 1.3 : 1)
+            .animation(.easeOut, value: isRunning)
+            .buttonStyle(PlainButtonStyle())
+            .onReceive(timer) { _ in
+                if isRunning {
+                    imageIndex = (imageIndex + 1) % 10 // 0부터 9까지 순환
+                }
+            }
+        }
+        .sheet(isPresented: $showingSetTimerView) {
+            SetTimerView(timeRemaining: $timeRemaining) // 모달로 표시할 뷰
+        }
+    }
+    
+    // 시, 분, 초 문자열로 변환하는 함수
+    func timeString(from totalSeconds: Int) -> String {
+        let hours = totalSeconds / 3600
+        let minutes = (totalSeconds % 3600) / 60
+        let seconds = totalSeconds % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+}
+
+
+// MARK: - PREVIEW
 
 #Preview {
     ContentView()
 }
-
-
-// timeremaining 을 설정할 때, circle drag gesture 로 추가하도록 변경.
-// 버튼 애니메이션 설정. 혹은, 거북이가 걸어가거나 돌아가는 애니메이션도 괜찮다
-// 아이폰 기본 알람음 사용 (radiar ?)
-// 상단 고정 기능과 소리 음소거 온오프기능을을 설정 버튼으로 지정하기
-// window 창의 타이머 제목.
-
-// 함수별로 기능을 잘 정렬하는 것도 중요
