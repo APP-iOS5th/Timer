@@ -24,7 +24,7 @@ class SoundManager {
     }
 }
 
-final class TimerView: ObservableObject {
+final class TimerViewModel: ObservableObject {
     
     enum TimerState {
           case active
@@ -90,19 +90,18 @@ final class TimerView: ObservableObject {
        }
 }
 
-
-
 struct ContentView: View {
 
-    @StateObject private var model = TimerView()
+    @StateObject private var model = TimerViewModel()
+
     
     var timePickerControl: some View {
         HStack() {
 
             TimePickerView(title: "min", range: model.minutesRange, binding: $model.selectedMinutesAmount)
         }
-        .frame(width: 360, height: 255)
-        .padding(.all, 32)
+        .frame(width: 200, height: 150)
+        .padding(.all, 10)
     }
     
     var progressView: some View {
@@ -120,8 +119,8 @@ struct ContentView: View {
                 }
             }
         }
-        .frame(width: 360, height: 255)
-        .padding(.all, 32)
+        .frame(width: 150, height: 150)
+        .padding(.all, 10)
     }
     
     var timerControls: some View {
@@ -151,7 +150,7 @@ struct ContentView: View {
                 .buttonStyle(PauseButtonStyle())
             }
         }
-        .padding(.horizontal, 32)
+        .padding(.horizontal, 10)
     }
 
     var body: some View {
@@ -164,7 +163,7 @@ struct ContentView: View {
             timerControls
             Spacer()
         }
-        .frame(maxWidth: .infinity , maxHeight: .infinity)
+        .frame(width: 300 , height: 300)
         .background(.black)
         .foregroundColor(.white)
     }
