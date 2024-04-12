@@ -47,8 +47,10 @@ class SoundManager {
 struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
+    @State private var totalTime = 0
     @State private var minuteInput = ""
     @State private var secondInput = ""
+    
     @State private var positionX: CGFloat = 0
     @State private var isRotated = false
     
@@ -61,7 +63,7 @@ struct ContentView: View {
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                 
                 Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining) / (60 * 60))
+                    .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat(totalTime))
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
                 
@@ -75,13 +77,15 @@ struct ContentView: View {
                                         positionX = CGFloat(geometry.frame(in: .global).origin.x) * (-1)
                                         positionX += geometry.size.width
                                     }
-                                } 
-
+                                }
+                                
                             }
                     }
                 }
                 
                 VStack {
+                    Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
+                        .font(.system(size: 30, weight: .bold))
                     HStack {
                         TextField("00", text: $minuteInput)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -119,9 +123,12 @@ struct ContentView: View {
                                 timeRemaining = (Int(minuteInput) ?? 0) * 60 + second
                             }
                     }
-                    .padding()
+                    
                     Button {
-                        isRunning.toggle()
+                        if Int(minuteInput) != nil && Int(secondInput) != nil {
+                            isRunning.toggle()
+                            totalTime = (Int(minuteInput) ?? 0) * 60 + (Int(secondInput) ?? 0)
+                        }
                     } label: {
                         Image(systemName: isRunning ? "pause" : "play.fill")
                     }
@@ -135,8 +142,6 @@ struct ContentView: View {
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
-                minuteInput = String(timeRemaining / 60)
-                secondInput = String(format: "%02d", timeRemaining % 60)
                 
                 if timeRemaining <= 10 {
                     NSSound.beep()
