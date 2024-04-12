@@ -57,7 +57,7 @@ struct ContentView: View {
                 if seconds == 0 && isPlay{
                     playSound("sampleSound")
                     isPlay = false
-                    seconds = 0
+                    defaultSeconds = 0
                 }
                 
             } else {
@@ -74,7 +74,7 @@ struct ContentView: View {
             
             Circle()
                 .trim(from: 0, to: CGFloat(1 - CGFloat(seconds) / CGFloat(defaultSeconds)))
-                .stroke(.red.opacity(0.7)
+                .stroke(defaultSeconds > 0 ? .green.opacity(0.7) : .red.opacity(0.7)
                         ,style: StrokeStyle(lineWidth: 10))
                 .rotationEffect(.init(degrees: -90))
                 .animation(.bouncy, value: seconds)
