@@ -19,8 +19,7 @@ struct AlwaysOnTopView: NSViewRepresentable {
     func updateNSView(_ nsView: NSView, context: Context) {
         if isAlwaysOnTop {
             window.level = .floating
-            window.titlebarAppearsTransparent = true
-            window.backgroundColor = NSColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.3)
+            window.backgroundColor = NSColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.8)
         } else {
             window.level = .normal
         }
