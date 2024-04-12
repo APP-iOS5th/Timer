@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isRunning = false
+    @State private var timeRemaining = 100
+    
     var body: some View {
         VStack {
             ZStack {
                 Circle()
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                 VStack {
-                    Text("00:00")
+                    Text("\(timeRemaining / 60): \(String(format: "%02d", timeRemaining % 60))")
                         .font(.system(size: 20, weight: .bold))
                     Button {
-                        
+                        isRunning.toggle()
                     } label: {
-                        Image(systemName: "play.fill")
+                        Image(systemName: isRunning ? "pause" : "play.fill")
                     }
                 }
                 
