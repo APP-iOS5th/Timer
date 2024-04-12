@@ -11,8 +11,12 @@
 		37FC17B02BC8BFA9006AC8A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC17AF2BC8BFA9006AC8A9 /* ContentView.swift */; };
 		37FC17B52BC8BFAB006AC8A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FC17B42BC8BFAB006AC8A9 /* Preview Assets.xcassets */; };
 		37FC17BD2BC8C8D7006AC8A9 /* Beep.mov in Resources */ = {isa = PBXBuildFile; fileRef = 37FC17BC2BC8C8D7006AC8A9 /* Beep.mov */; };
+		8315A5BE2BC8FDBA00E2CEBB /* TimerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8315A5BD2BC8FDBA00E2CEBB /* TimerListView.swift */; };
+		8315A5C02BC8FDC500E2CEBB /* TimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8315A5BF2BC8FDC500E2CEBB /* TimerCell.swift */; };
+		8315A5C42BC8FE4D00E2CEBB /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8315A5C32BC8FE4D00E2CEBB /* TimerState.swift */; };
 		83D6F2BA2BC8FB92004D2D48 /* TimerTickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6F2B92BC8FB92004D2D48 /* TimerTickView.swift */; };
 		83D6F2BC2BC8FBBF004D2D48 /* InitialTimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6F2BB2BC8FBBF004D2D48 /* InitialTimeLabel.swift */; };
+		83D6F2BF2BC8FD01004D2D48 /* RemainingTimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6F2BE2BC8FD01004D2D48 /* RemainingTimeLabel.swift */; };
 		83D770872BC8D0B200949BBB /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D770862BC8D0B200949BBB /* TimerView.swift */; };
 		83D770892BC8D5E900949BBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83D770882BC8D5E900949BBB /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -24,8 +28,12 @@
 		37FC17B42BC8BFAB006AC8A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37FC17B62BC8BFAB006AC8A9 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
 		37FC17BC2BC8C8D7006AC8A9 /* Beep.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Beep.mov; sourceTree = "<group>"; };
+		8315A5BD2BC8FDBA00E2CEBB /* TimerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListView.swift; sourceTree = "<group>"; };
+		8315A5BF2BC8FDC500E2CEBB /* TimerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCell.swift; sourceTree = "<group>"; };
+		8315A5C32BC8FE4D00E2CEBB /* TimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
 		83D6F2B92BC8FB92004D2D48 /* TimerTickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTickView.swift; sourceTree = "<group>"; };
 		83D6F2BB2BC8FBBF004D2D48 /* InitialTimeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTimeLabel.swift; sourceTree = "<group>"; };
+		83D6F2BE2BC8FD01004D2D48 /* RemainingTimeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemainingTimeLabel.swift; sourceTree = "<group>"; };
 		83D770862BC8D0B200949BBB /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		83D770882BC8D5E900949BBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,6 +68,8 @@
 		37FC17AC2BC8BFA9006AC8A9 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
+				8315A5C22BC8FE4500E2CEBB /* Model */,
+				8315A5C12BC8FE3100E2CEBB /* ViewModel */,
 				83D6F2B82BC8FB83004D2D48 /* View */,
 				37FC17AD2BC8BFA9006AC8A9 /* TimerApp.swift */,
 				37FC17AF2BC8BFA9006AC8A9 /* ContentView.swift */,
@@ -79,14 +89,40 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		8315A5C12BC8FE3100E2CEBB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8315A5C22BC8FE4500E2CEBB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8315A5C32BC8FE4D00E2CEBB /* TimerState.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		83D6F2B82BC8FB83004D2D48 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8315A5BD2BC8FDBA00E2CEBB /* TimerListView.swift */,
 				83D770862BC8D0B200949BBB /* TimerView.swift */,
-				83D6F2B92BC8FB92004D2D48 /* TimerTickView.swift */,
-				83D6F2BB2BC8FBBF004D2D48 /* InitialTimeLabel.swift */,
+				83D6F2BD2BC8FCE2004D2D48 /* Component */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		83D6F2BD2BC8FCE2004D2D48 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				83D6F2BB2BC8FBBF004D2D48 /* InitialTimeLabel.swift */,
+				83D6F2B92BC8FB92004D2D48 /* TimerTickView.swift */,
+				83D6F2BE2BC8FD01004D2D48 /* RemainingTimeLabel.swift */,
+				8315A5BF2BC8FDC500E2CEBB /* TimerCell.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +198,10 @@
 			files = (
 				83D770872BC8D0B200949BBB /* TimerView.swift in Sources */,
 				83D6F2BC2BC8FBBF004D2D48 /* InitialTimeLabel.swift in Sources */,
+				83D6F2BF2BC8FD01004D2D48 /* RemainingTimeLabel.swift in Sources */,
+				8315A5C02BC8FDC500E2CEBB /* TimerCell.swift in Sources */,
+				8315A5C42BC8FE4D00E2CEBB /* TimerState.swift in Sources */,
+				8315A5BE2BC8FDBA00E2CEBB /* TimerListView.swift in Sources */,
 				83D6F2BA2BC8FB92004D2D48 /* TimerTickView.swift in Sources */,
 				37FC17B02BC8BFA9006AC8A9 /* ContentView.swift in Sources */,
 				37FC17AE2BC8BFA9006AC8A9 /* TimerApp.swift in Sources */,

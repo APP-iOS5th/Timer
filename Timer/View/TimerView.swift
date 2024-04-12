@@ -8,12 +8,6 @@
 import SwiftUI
 import Combine
 
-enum TimerState {
-    case pause
-    case run
-    case stop
-}
-
 struct TimerView: View {
     private let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
     @State private var initialTime = 0
@@ -26,34 +20,7 @@ struct TimerView: View {
             TimerTickView()
                 .opacity(0.3)
             VStack {
-                Button {
-                    switch initialTime {
-                        case 0..<180:
-                            initialTime = 180
-                        case 180..<300:
-                            initialTime = 350
-                        case 300..<420:
-                            initialTime = 420
-                        case 300..<600:
-                            initialTime = 600
-                        case 600..<900:
-                            initialTime = 900
-                        case 900..<1200:
-                            initialTime = 1200
-                        case 1200..<1500:
-                            initialTime = 1500
-                        case 1500..<1800:
-                            initialTime = 1800
-                        default:
-                            initialTime = 0
-                    }
-                    remainingTime = initialTime
-                } label: {
-                    Text("\(String(format: "%02d", remainingTime / 60)):\(String(format: "%02d", remainingTime % 60))")
-                        .font(.system(size: 40, weight: .bold))
-                        .foregroundStyle(.gray)
-                }
-                .buttonStyle(.plain)
+                RemainingTimeLabel(remainingTime: remainingTime)
                 InitialTimeLabel(time: initialTime)
             }
             
