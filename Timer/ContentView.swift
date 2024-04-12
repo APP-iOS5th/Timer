@@ -47,16 +47,21 @@ class SoundManger {
 struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 10 //타이머의 남은 시간을 추적
-    @State private var choice = " "
+    @State private var choice = ""
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         VStack {
             Picker(selection: $choice, label: Text("선택해주세요")){
-                Text("🏃🏻‍➡️")
-                Text("🏃🏻‍♀️‍➡️")
-                Text("🏃🏻‍♂️‍➡️")
-            }.frame(width: 100)
+                Text("🏃🏻‍➡️").tag("🏃🏻‍➡️")
+                Text("🏃🏻‍♀️‍➡️").tag("🏃🏻‍♀️‍➡️")
+                Text("🏃🏻‍♂️‍➡️").tag("🏃🏻‍♂️‍➡️")
+                Text("🦍").tag("🦍")
+                Text("🐈").tag("🐈")
+                Text("🐕").tag("🐕")
+                
+            }
+            .frame(width: 140)
             Spacer()
             Spacer()
             Spacer()
@@ -65,7 +70,7 @@ struct ContentView: View {
                     .trim(from: 0, to: CGFloat(timeRemaining)/(30 * 60)) //특정 부분만 남기고 나머지 부분 절단
                     .stroke(Color.gray.opacity(0.2), lineWidth: 20)
                     .rotationEffect(.degrees(-90))
-                    Text("\(choice)")
+                Text("\(choice)")
                     .rotationEffect(.degrees(Double(timeRemaining)/(30 * 60 )))
                     .offset(y: -50)
                 VStack {
