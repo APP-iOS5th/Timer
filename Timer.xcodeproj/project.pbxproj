@@ -11,6 +11,8 @@
 		9FB5D5622BC8BFC600B4F818 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB5D5612BC8BFC600B4F818 /* ContentView.swift */; };
 		9FB5D5642BC8BFC800B4F818 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FB5D5632BC8BFC800B4F818 /* Assets.xcassets */; };
 		9FB5D5672BC8BFC800B4F818 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FB5D5662BC8BFC800B4F818 /* Preview Assets.xcassets */; };
+		9FB5D56F2BC9047500B4F818 /* Beep.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9FB5D56E2BC9047500B4F818 /* Beep.mov */; };
+		9FB5D5732BC9093800B4F818 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9FB5D5722BC9093800B4F818 /* beep.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		9FB5D5632BC8BFC800B4F818 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FB5D5662BC8BFC800B4F818 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9FB5D5682BC8BFC800B4F818 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
+		9FB5D56E2BC9047500B4F818 /* Beep.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Beep.mov; path = ../../../iosdev/ios_sounds/Beep.mov; sourceTree = "<group>"; };
+		9FB5D5722BC9093800B4F818 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = beep.mp3; path = ../../../iosdev/ios_sounds/beep.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 				9FB5D5612BC8BFC600B4F818 /* ContentView.swift */,
 				9FB5D5632BC8BFC800B4F818 /* Assets.xcassets */,
 				9FB5D5682BC8BFC800B4F818 /* Timer.entitlements */,
+				9FB5D56E2BC9047500B4F818 /* Beep.mov */,
+				9FB5D5722BC9093800B4F818 /* beep.mp3 */,
 				9FB5D5652BC8BFC800B4F818 /* Preview Content */,
 			);
 			path = Timer;
@@ -128,6 +134,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FB5D5672BC8BFC800B4F818 /* Preview Assets.xcassets in Resources */,
+				9FB5D56F2BC9047500B4F818 /* Beep.mov in Resources */,
+				9FB5D5732BC9093800B4F818 /* beep.mp3 in Resources */,
 				9FB5D5642BC8BFC800B4F818 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
