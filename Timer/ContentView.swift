@@ -118,35 +118,57 @@ struct ContentView: View {
                 VStack{
                     Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
                         .font(.system(size: 20, weight: .bold))
-                    Image(systemName: "square.fill")
-                        .resizable()
-                        .frame(width: 60, height: 2)
-                        .offset(y:-2)
+                    
+                        .padding(1.3)
+                    
+                    
+                    VStack {
+                        Image(systemName: animeIconName)
+                            .offset(x: animeIconPositionX, y: 0)
+                            .animation(.linear(duration: 1.5), value: animeIconPositionX)
                         
-                    Image(systemName: animeIconName)
-                        .offset(x: animeIconPositionX, y: 0)
-                        .animation(.linear(duration: 1.5), value: animeIconPositionX)
+                        Image(systemName: "square.fill")
+                            .resizable()
+                            .frame(width: 55, height: 1)
+                            .offset(y:1)
+                    }
                 }
             }
         }
-        
         .padding()
-        HStack {
-            Button {
-                isRunning.toggle()
-            } label: {
-                Image(systemName: isRunning ? "pause" : "play")
+        
+        VStack {
+            HStack{
+                Button {
+                    isRunning.toggle()
+                } label: {
+                    Image(systemName: isRunning ? "pause" : "play")
+                        .frame(width: 15, height: 10)
+                }
+                Button {
+                    timeRemaining = 0
+                } label: {
+                    Image(systemName: "gobackward")
+                        .frame(width: 15, height: 10)
+                }
             }
-            Button {
-                plusButtonActionCheckMaxTime()
-            } label: {
-                Image(systemName: "plus")
+            HStack {
+                Button {
+                    plusButtonActionCheckMaxTime()
+                } label: {
+                    Image(systemName: "plus")
+                        .frame(width: 15, height: 10)
+                }
+                Button {
+                    minusButtonActionCheckMinTime()
+                } label: {
+                    Image(systemName: "minus")
+                        .frame(width: 15, height: 10)
+                }
             }
-            Button {
-                minusButtonActionCheckMinTime()
-            } label: {
-                Image(systemName: "minus")
-            }
+            Text("+ - 버튼 : 10초 간격")
+                .padding(5)
+            
         }
         .padding()
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
