@@ -1,39 +1,12 @@
-//
-//  ContentView.swift
-//  Timer
-//
-//  Created by Jungman Bae on 4/12/24.
-//
-
 import SwiftUI
 import AVFoundation
-
-
-struct AlwaysOnTopView: NSViewRepresentable {
-    let window: NSWindow
-    let isAlwaysOnTop: Bool
-    
-    func makeNSView(context: Context) -> NSView {
-        let view = NSView()
-        return view
-    }
-    
-    func updateNSView(_ nsView: NSView, context: Context) {
-        if isAlwaysOnTop {
-            window.level = .floating
-        } else {
-            window.level = .normal
-        }
-    }
-}
-
 
 class SoundManager {
     static let instance = SoundManager()
     var player: AVAudioPlayer?
     
     func playSound() {
-        guard let url = Bundle.main.url(forResource: "Beep", withExtension: "mov") else { return }
+        guard let url = Bundle.main.url(forResource: "notify", withExtension: "mp3") else { return }
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
@@ -47,6 +20,7 @@ class SoundManager {
 
 struct ContentView: View {
     @State private var isRunning = false
+    @State private var userInput = "" // 입력
     @State private var timeRemaining = 0
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -58,62 +32,63 @@ struct ContentView: View {
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                 
                 Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
-                    .stroke(Color.blue, lineWidth: 10)
+                    .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat((Int(userInput) ?? 0) * 60))
+                    .stroke(Color.purple, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
                 
+                
                 VStack {
-                    Button {
-                        switch timeRemaining {
-                        case 0..<180:
-                            timeRemaining = 180
-                        case 180..<300:
-                            timeRemaining = 300
-                        case 300..<420:
-                            timeRemaining = 420
-                        case 300..<600:
-                            timeRemaining = 600
-                        case 600..<900:
-                            timeRemaining = 900
-                        case 900..<1200:
-                            timeRemaining = 1200
-                        case 1200..<1500:
-                            timeRemaining = 1500
-                        case 1500..<1800:
-                            timeRemaining = 1800
-                        default:
+                    Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
+                        .font(.system(size: 25, weight: .bold))
+                    
+                        Button {
                             timeRemaining = 0
+                            isRunning = false
+                            userInput = ""
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
                         }
-
+                        .buttonStyle(PlainButtonStyle())
+                        .font(.system(size: 8))
+                        .offset(CGSize(width: 40, height: -15))
+                    
+                    TextField("분을 입력", text: $userInput) // 입력
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding([.trailing, .leading])
+                    
+                    Button {
+                        if isRunning {
+                            isRunning.toggle()
+                        } else {
+                            if let inputTime = Int(userInput) {
+                                timeRemaining = inputTime * 60
+                                isRunning.toggle()
+                            }
+                        }
                     } label: {
-                        Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                            .font(.system(size: 20, weight: .bold))
+                        Image(systemName: isRunning ? "pause.fill" : "play.fill")
                     }
                     .buttonStyle(PlainButtonStyle())
-                    Button {
-                        isRunning.toggle()
-                    } label: {
-                        Image(systemName: isRunning ? "pause" : "play.fill")
-                    }
+                    .font(.system(size: 20))
+                    .padding(1)
                 }
             }
-                
         }
-        .frame(width: 100, height: 100)
+        .frame(width: 150, height: 150)
         .padding()
-        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
-                if timeRemaining <= 10 {
-                    NSSound.beep()
-                }
             } else if isRunning {
+                SoundManager.instance.playSound()
                 isRunning = false
             }
         }
     }
 }
+
+
+
 
 #Preview {
     ContentView()
