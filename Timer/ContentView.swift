@@ -1,6 +1,25 @@
 import SwiftUI
 import AVFoundation
 
+// 창 항상 맨위로 표시
+struct AlwaysOnTopView: NSViewRepresentable {
+    let window: NSWindow
+    let isAlwaysOnTop: Bool
+    
+    func makeNSView(context: Context) -> some NSView {
+        let view = NSView()
+        return view
+    }
+    
+    func updateNSView(_ nsView: NSViewType, context: Context) {
+        if isAlwaysOnTop {
+            window.level = .floating
+        } else {
+            window.level = .normal
+        }
+    }
+}
+
 // 경고 소리
 class SoundManager {
     static let instance = SoundManager()
@@ -71,6 +90,7 @@ struct ContentView: View {
         }
         .frame(width: 100, height: 100)
         .padding()
+        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true)) // true or false
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1 // 1초씩 감소
