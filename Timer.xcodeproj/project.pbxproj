@@ -14,6 +14,7 @@
 		8315A5BE2BC8FDBA00E2CEBB /* TimerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8315A5BD2BC8FDBA00E2CEBB /* TimerListView.swift */; };
 		8315A5C02BC8FDC500E2CEBB /* TimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8315A5BF2BC8FDC500E2CEBB /* TimerCell.swift */; };
 		8315A5C42BC8FE4D00E2CEBB /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8315A5C32BC8FE4D00E2CEBB /* TimerState.swift */; };
+		8315A5C62BC8FEAC00E2CEBB /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8315A5C52BC8FEAC00E2CEBB /* TimerViewModel.swift */; };
 		83D6F2BA2BC8FB92004D2D48 /* TimerTickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6F2B92BC8FB92004D2D48 /* TimerTickView.swift */; };
 		83D6F2BC2BC8FBBF004D2D48 /* InitialTimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6F2BB2BC8FBBF004D2D48 /* InitialTimeLabel.swift */; };
 		83D6F2BF2BC8FD01004D2D48 /* RemainingTimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6F2BE2BC8FD01004D2D48 /* RemainingTimeLabel.swift */; };
@@ -31,6 +32,7 @@
 		8315A5BD2BC8FDBA00E2CEBB /* TimerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListView.swift; sourceTree = "<group>"; };
 		8315A5BF2BC8FDC500E2CEBB /* TimerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCell.swift; sourceTree = "<group>"; };
 		8315A5C32BC8FE4D00E2CEBB /* TimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
+		8315A5C52BC8FEAC00E2CEBB /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		83D6F2B92BC8FB92004D2D48 /* TimerTickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTickView.swift; sourceTree = "<group>"; };
 		83D6F2BB2BC8FBBF004D2D48 /* InitialTimeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTimeLabel.swift; sourceTree = "<group>"; };
 		83D6F2BE2BC8FD01004D2D48 /* RemainingTimeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemainingTimeLabel.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		8315A5C12BC8FE3100E2CEBB /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8315A5C52BC8FEAC00E2CEBB /* TimerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8315A5C62BC8FEAC00E2CEBB /* TimerViewModel.swift in Sources */,
 				83D770872BC8D0B200949BBB /* TimerView.swift in Sources */,
 				83D6F2BC2BC8FBBF004D2D48 /* InitialTimeLabel.swift in Sources */,
 				83D6F2BF2BC8FD01004D2D48 /* RemainingTimeLabel.swift in Sources */,
