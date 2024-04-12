@@ -56,7 +56,6 @@ struct ContentView: View {
     private let MIN_TIME = 0
     private let TIMER_VALUE = 10
     
-    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     func plusButtonActionCheckMaxTime() {
@@ -65,6 +64,8 @@ struct ContentView: View {
         } else {
             timeRemaining += TIMER_VALUE
         }
+        animeIconName = "airplane"
+        animeIconPositionX = -20
     }
     
     func minusButtonActionCheckMinTime() {
@@ -74,6 +75,8 @@ struct ContentView: View {
         } else {
             timeRemaining -= TIMER_VALUE
         }
+        animeIconName = "airplane"
+        animeIconPositionX = -20
     }
     
     func timerAction() {
@@ -86,8 +89,10 @@ struct ContentView: View {
                 
             }
             
-            animeIconPositionX += 1
+            animeIconPositionX += 2
+            
             if animeIconPositionX >= 20 {
+                animeIconName = "airplane"
                 animeIconPositionX = -20
             }
         } else if isRunning {
@@ -120,11 +125,11 @@ struct ContentView: View {
                         
                     Image(systemName: animeIconName)
                         .offset(x: animeIconPositionX, y: 0)
-                    
+                        .animation(.linear(duration: 1.5), value: animeIconPositionX)
                 }
-                
             }
         }
+        
         .padding()
         HStack {
             Button {
@@ -147,7 +152,6 @@ struct ContentView: View {
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         .onReceive(timer) { _ in
             timerAction()
-            
         }
     }
 }
