@@ -12,6 +12,11 @@
 		37FC17B22BC8BFAB006AC8A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FC17B12BC8BFAB006AC8A9 /* Assets.xcassets */; };
 		37FC17B52BC8BFAB006AC8A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FC17B42BC8BFAB006AC8A9 /* Preview Assets.xcassets */; };
 		37FC17BD2BC8C8D7006AC8A9 /* Beep.mov in Resources */ = {isa = PBXBuildFile; fileRef = 37FC17BC2BC8C8D7006AC8A9 /* Beep.mov */; };
+		F457403B2BC8D0FD0023094C /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457403A2BC8D0FD0023094C /* CircularProgressView.swift */; };
+		F457403D2BC8D55D0023094C /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457403C2BC8D55D0023094C /* Int+Extension.swift */; };
+		F45740402BC8D7930023094C /* BtnStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457403F2BC8D7930023094C /* BtnStyle.swift */; };
+		F45740422BC8D8020023094C /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45740412BC8D8020023094C /* TimePickerView.swift */; };
+		F45740472BC902FB0023094C /* bamSong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F45740462BC902FB0023094C /* bamSong.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		37FC17B42BC8BFAB006AC8A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37FC17B62BC8BFAB006AC8A9 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
 		37FC17BC2BC8C8D7006AC8A9 /* Beep.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Beep.mov; sourceTree = "<group>"; };
+		F457403A2BC8D0FD0023094C /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		F457403C2BC8D55D0023094C /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		F457403F2BC8D7930023094C /* BtnStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnStyle.swift; sourceTree = "<group>"; };
+		F45740412BC8D8020023094C /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
+		F45740462BC902FB0023094C /* bamSong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bamSong.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,11 +64,16 @@
 		37FC17AC2BC8BFA9006AC8A9 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
+				F457403C2BC8D55D0023094C /* Int+Extension.swift */,
+				F457403A2BC8D0FD0023094C /* CircularProgressView.swift */,
 				37FC17AD2BC8BFA9006AC8A9 /* TimerApp.swift */,
 				37FC17AF2BC8BFA9006AC8A9 /* ContentView.swift */,
+				F45740412BC8D8020023094C /* TimePickerView.swift */,
+				F457403F2BC8D7930023094C /* BtnStyle.swift */,
 				37FC17B12BC8BFAB006AC8A9 /* Assets.xcassets */,
 				37FC17B62BC8BFAB006AC8A9 /* Timer.entitlements */,
 				37FC17BC2BC8C8D7006AC8A9 /* Beep.mov */,
+				F45740462BC902FB0023094C /* bamSong.mp3 */,
 				37FC17B32BC8BFAB006AC8A9 /* Preview Content */,
 			);
 			path = Timer;
@@ -130,6 +145,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F45740472BC902FB0023094C /* bamSong.mp3 in Resources */,
 				37FC17B52BC8BFAB006AC8A9 /* Preview Assets.xcassets in Resources */,
 				37FC17BD2BC8C8D7006AC8A9 /* Beep.mov in Resources */,
 				37FC17B22BC8BFAB006AC8A9 /* Assets.xcassets in Resources */,
@@ -144,6 +160,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FC17B02BC8BFA9006AC8A9 /* ContentView.swift in Sources */,
+				F45740422BC8D8020023094C /* TimePickerView.swift in Sources */,
+				F457403D2BC8D55D0023094C /* Int+Extension.swift in Sources */,
+				F45740402BC8D7930023094C /* BtnStyle.swift in Sources */,
+				F457403B2BC8D0FD0023094C /* CircularProgressView.swift in Sources */,
 				37FC17AE2BC8BFA9006AC8A9 /* TimerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
