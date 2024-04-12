@@ -23,12 +23,13 @@ struct TimerCell: View {
     
     var body: some View {
         ZStack {
-            TimerTickView(totalTime: totalTime, remainingTime: remainingTime)
             Circle()
                 .rotation(.degrees(-90))
                 .foregroundStyle(Color.deepGray)
-                .padding(15)
+                .padding(8)
+            TimerTickView(totalTime: totalTime, remainingTime: remainingTime)
             InitialTimeLabel(time: totalTime)
+                .scaleEffect(1.2)
         }
         .frame(width: 150, height: 150)
         .background(Color.black)
@@ -39,5 +40,12 @@ struct TimerCell: View {
     TimerCell(
         totalTime: 30,
         remainingTime: 30
+    )
+}
+
+#Preview {
+    TimerCell(
+        totalTime: 60,
+        remainingTime: 60
     )
 }

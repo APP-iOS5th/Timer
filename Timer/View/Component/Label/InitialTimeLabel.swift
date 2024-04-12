@@ -16,7 +16,7 @@ struct InitialTimeLabel: View {
     
     var body: some View {
         if time % 60 == 0 {
-            Text("\(String(format: "%02d", time / 60)) minutes")
+            Text("\(String(format: "%02d", time / 60)) min")
                 .font(.title)
                 .foregroundStyle(.gray)
         } else {
@@ -29,4 +29,8 @@ struct InitialTimeLabel: View {
 
 #Preview {
     InitialTimeLabel(time: 50)
+}
+
+#Preview {
+    InitialTimeLabel(time: 60)
 }

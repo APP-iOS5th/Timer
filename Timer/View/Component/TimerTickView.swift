@@ -32,8 +32,8 @@ struct TimerTickView: View {
             )
             .stroke(
                 style: .init(
-                    lineWidth: 15,
-                    dash: [1.5, 5]
+                    lineWidth: 10,
+                    dash: [2, 5]
                 )
             )
             .rotation(.degrees(-90))
@@ -45,4 +45,5 @@ struct TimerTickView: View {
 
 #Preview {
     TimerTickView()
+        .frame(width: 150, height: 150)
 }
