@@ -11,6 +11,7 @@
 		C6F438B42BC8BFAF004EC1C2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F438B32BC8BFAF004EC1C2 /* ContentView.swift */; };
 		C6F438B62BC8BFB1004EC1C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6F438B52BC8BFB1004EC1C2 /* Assets.xcassets */; };
 		C6F438B92BC8BFB1004EC1C2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6F438B82BC8BFB1004EC1C2 /* Preview Assets.xcassets */; };
+		C6F438C12BC8CED6004EC1C2 /* ios_17_radial.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C6F438C02BC8CED6004EC1C2 /* ios_17_radial.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		C6F438B52BC8BFB1004EC1C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6F438B82BC8BFB1004EC1C2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C6F438BA2BC8BFB1004EC1C2 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
+		C6F438C02BC8CED6004EC1C2 /* ios_17_radial.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = ios_17_radial.mp3; path = ../../../Downloads/ios_17_radial.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				C6F438B12BC8BFAF004EC1C2 /* TimerApp.swift */,
+				C6F438C02BC8CED6004EC1C2 /* ios_17_radial.mp3 */,
 				C6F438B32BC8BFAF004EC1C2 /* ContentView.swift */,
 				C6F438B52BC8BFB1004EC1C2 /* Assets.xcassets */,
 				C6F438BA2BC8BFB1004EC1C2 /* Timer.entitlements */,
@@ -129,6 +132,7 @@
 			files = (
 				C6F438B92BC8BFB1004EC1C2 /* Preview Assets.xcassets in Resources */,
 				C6F438B62BC8BFB1004EC1C2 /* Assets.xcassets in Resources */,
+				C6F438C12BC8CED6004EC1C2 /* ios_17_radial.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
