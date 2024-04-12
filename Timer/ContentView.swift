@@ -9,12 +9,11 @@ import SwiftUI
 import AVFoundation
 
 //소리 부분 클래스
-
 class SoundPlayer: ObservableObject {
     var player: AVAudioPlayer?
     
     func playSound() {
-        guard let url = Bundle.main.url(forResource: "congratulations", withExtension: "mp3") else {
+        guard let url = Bundle.main.url(forResource: "congrats", withExtension: "flac") else {
             print("Sound file not found.")
             return
         }
@@ -91,7 +90,7 @@ struct ContentView: View {
     func addTime(minutes: Int) {
         timeRemaining += minutes * 60
     }
-    
+    //뭔가 끝날때 강조하고 싶어서 우웅 하고 움직이게 해봄
     func animateText() {
         withAnimation(.easeInOut(duration: 1.0)) {
             scale = 1.5

@@ -11,6 +11,7 @@
 		B82F3F402BC8BFB200511243 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F3F3F2BC8BFB200511243 /* ContentView.swift */; };
 		B82F3F422BC8BFB400511243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B82F3F412BC8BFB400511243 /* Assets.xcassets */; };
 		B82F3F452BC8BFB400511243 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B82F3F442BC8BFB400511243 /* Preview Assets.xcassets */; };
+		B82F3F4D2BC8D5DF00511243 /* congrats.flac in Resources */ = {isa = PBXBuildFile; fileRef = B82F3F4C2BC8D5DF00511243 /* congrats.flac */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		B82F3F412BC8BFB400511243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B82F3F442BC8BFB400511243 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B82F3F462BC8BFB400511243 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
+		B82F3F4C2BC8D5DF00511243 /* congrats.flac */ = {isa = PBXFileReference; lastKnownFileType = file; name = congrats.flac; path = ../../../Downloads/congrats.flac; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				B82F3F3F2BC8BFB200511243 /* ContentView.swift */,
 				B82F3F412BC8BFB400511243 /* Assets.xcassets */,
 				B82F3F462BC8BFB400511243 /* Timer.entitlements */,
+				B82F3F4C2BC8D5DF00511243 /* congrats.flac */,
 				B82F3F432BC8BFB400511243 /* Preview Content */,
 			);
 			path = Timer;
@@ -127,6 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B82F3F4D2BC8D5DF00511243 /* congrats.flac in Resources */,
 				B82F3F452BC8BFB400511243 /* Preview Assets.xcassets in Resources */,
 				B82F3F422BC8BFB400511243 /* Assets.xcassets in Resources */,
 			);
