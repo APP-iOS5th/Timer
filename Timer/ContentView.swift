@@ -8,6 +8,9 @@
 import SwiftUI
 import AVFoundation
 
+extension Color {
+    static let customColor = Color("CustomColor")
+}
 
 struct AlwaysOnTopView: NSViewRepresentable {
     let window: NSWindow
@@ -61,22 +64,22 @@ struct ContentView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        
         ZStack {
+            Color.customColor.edgesIgnoringSafeArea(.all)
             Color.red
                 .opacity(isRed ? 0.5 : 0)
                 .animation(.easeInOut(duration: 0.5), value: isRed)
                 .ignoresSafeArea()
-            
             VStack {
                 ZStack {
                     Circle()
-                        .stroke(Color.gray.opacity(0.2), lineWidth: 10)
+                        .stroke(Color.gray.opacity(0.2), lineWidth: 20)
                     
                     Circle()
-                        .trim(from: 0, to: CGFloat(timeRemaining) / (15 * 60))
-                        .stroke(Color.blue, lineWidth: 10)
-                        .rotationEffect(.degrees(-90))
+                            .trim(from: 0, to: CGFloat(timeRemaining) / (15 * 60))
+                            .stroke(Color.blue, style: StrokeStyle(lineWidth: 20, lineCap: .round))
+                            .rotationEffect(.degrees(-90))
+                                        
                     
                     VStack {
                         Button {
@@ -97,7 +100,7 @@ struct ContentView: View {
                         .buttonStyle(PlainButtonStyle())
                         Button {
                             isRunning.toggle()
-                            if isRunning && timeRemaining <= 5 {
+                            if isRunning && timeRemaining > 0 && timeRemaining <= 5 {
                                 isRed = true // 재생을 누르고, 5초 이하면 빨간색 활성화
                                 SoundManager.instance.playSound()
                             } else {
@@ -108,7 +111,6 @@ struct ContentView: View {
                             Image(systemName: isRunning ? "pause" : "play.fill")
                         }
                     }
-                    
                 }
                 .frame(width: 150, height: 150)
                 .padding()
