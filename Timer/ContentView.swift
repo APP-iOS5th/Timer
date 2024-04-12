@@ -7,7 +7,7 @@
 
 import SwiftUI
 import AVFoundation
-
+import Combine
 
 struct AlwaysOnTopView: NSViewRepresentable {
     let window: NSWindow
@@ -44,10 +44,13 @@ class SoundManager {
     }
 }
 
-
 struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
+    @State private var minuteInput = ""
+    @State private var secondInput = ""
+    @State private var positionX: CGFloat = 0
+    @State private var isRotated = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -58,38 +61,49 @@ struct ContentView: View {
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                 
                 Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
+                    .trim(from: 0, to: CGFloat(timeRemaining) / (60 * 60))
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
                 
                 VStack {
-                    Button {
-                        switch timeRemaining {
-                        case 0..<180:
-                            timeRemaining = 180
-                        case 180..<300:
-                            timeRemaining = 300
-                        case 300..<420:
-                            timeRemaining = 420
-                        case 300..<600:
-                            timeRemaining = 600
-                        case 600..<900:
-                            timeRemaining = 900
-                        case 900..<1200:
-                            timeRemaining = 1200
-                        case 1200..<1500:
-                            timeRemaining = 1500
-                        case 1500..<1800:
-                            timeRemaining = 1800
-                        default:
-                            timeRemaining = 0
-                        }
+                    HStack {
+                        TextField("00", text: $minuteInput)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .frame(width: 40)
+                            .onReceive(Just(minuteInput)) {
+                                let filteredMinute = $0.filter { "0123456789".contains($0) }
+                                if filteredMinute != $0 {
+                                    minuteInput = filteredMinute
+                                }
 
-                    } label: {
-                        Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                            .font(.system(size: 20, weight: .bold))
+                                if let minute = Int(minuteInput), minute > 59 {
+                                    minuteInput = "59"
+                                }
+                            }
+                            .onChange(of: minuteInput) { oldValue, newValue in
+                                let minute = Int(newValue) ?? 0
+                                timeRemaining = minute * 60 + (Int(secondInput) ?? 0)
+                            }
+                        Text(":")
+                        TextField("00", text: $secondInput)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .frame(width: 40)
+                            .onReceive(Just(secondInput)) {
+                                let filteredSecond = $0.filter { "0123456789".contains($0) }
+                                if filteredSecond != $0 {
+                                    secondInput = filteredSecond
+                                }
+                                
+                                if let second = Int(secondInput), second > 59 {
+                                    secondInput = "59"
+                                }
+                            }
+                            .onChange(of: secondInput) { oldValue, newValue in
+                                let second = Int(newValue) ?? 0
+                                timeRemaining = (Int(minuteInput) ?? 0) * 60 + second
+                            }
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .padding()
                     Button {
                         isRunning.toggle()
                     } label: {
@@ -97,14 +111,17 @@ struct ContentView: View {
                     }
                 }
             }
-                
+
         }
-        .frame(width: 100, height: 100)
+        .frame(width: 150, height: 150)
         .padding()
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
+                minuteInput = String(timeRemaining / 60)
+                secondInput = String(format: "%02d", timeRemaining % 60)
+                
                 if timeRemaining <= 10 {
                     NSSound.beep()
                 }
