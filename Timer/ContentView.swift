@@ -7,7 +7,7 @@ class SoundManager {
     var player: AVAudioPlayer?
     
     func playSound() {
-        guard let url = Bundle.main.url(forResource: "Beep", withExtension: "mov") else { return }
+        guard let url = Bundle.main.url(forResource: "Timer_Beep", withExtension: "mov") else { return }
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
@@ -39,9 +39,9 @@ struct AlwaysOnTopView: NSViewRepresentable {
 
 struct ContentView: View {
     @State private var isRunning = false
-    @State private var timeRemaining = 1000
+    @State private var timeRemaining = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    let randomColors: [Color] = [.red, .blue, .pink, .orange, .black]
+    let randomColors: [Color] = [ .red, .orange, .yellow, .green, .blue, .purple, .pink, .teal, .brown, .gray, .black, .white, .mint, .indigo]
     
     var body: some View {
         VStack {
@@ -50,7 +50,7 @@ struct ContentView: View {
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                 
                 Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
+                    .trim(from: 0, to: CGFloat(timeRemaining) / 1800)
                     .stroke(
                         AngularGradient(
                             gradient: Gradient(colors: randomColors.shuffled()), center: .center
@@ -62,32 +62,18 @@ struct ContentView: View {
                     Text("Timer")
                         .font(.title2)
                     
-                    Button {
-                        switch timeRemaining {
-                        case 0..<180:
-                            timeRemaining = 180
-                        case 180..<300:
-                            timeRemaining = 300
-                        case 300..<420:
-                            timeRemaining = 420
-                        case 300..<600:
-                            timeRemaining = 600
-                        case 600..<900:
-                            timeRemaining = 900
-                        case 900..<1200:
-                            timeRemaining = 1200
-                        case 1200..<1500:
-                            timeRemaining = 1500
-                        case 1500..<1800:
-                            timeRemaining = 1800
-                        default:
-                            timeRemaining = 0
+                    Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
+                        .font(.system(size: 40, weight: .bold))
+                        .onReceive(timer) { _ in
+                            if isRunning && timeRemaining > 0 {
+                                timeRemaining -= 1
+                                if timeRemaining <= 10 {
+                                    SoundManager.instance.playSound()
+                                }
+                            } else if isRunning {
+                                isRunning = false
+                            }
                         }
-                    } label: {
-                        Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                            .font(.system(size: 40, weight: .bold))
-                    }
-                    .buttonStyle(PlainButtonStyle())
                     
                     HStack {
                         Stepper(value: $timeRemaining, in: 0...1800, step: 60) {
@@ -109,18 +95,9 @@ struct ContentView: View {
         .frame(width: 400, height: 400)
         .padding()
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
-        .onReceive(timer) { _ in
-            if isRunning && timeRemaining > 0 {
-                timeRemaining -= 1
-                if timeRemaining <= 10 {
-                    SoundManager.instance.playSound()
-                }
-            } else if isRunning {
-                isRunning = false
-            }
-        }
     }
 }
+
 
 
 struct ContentView_Previews: PreviewProvider {
