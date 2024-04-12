@@ -45,7 +45,7 @@ class SoundManager {
 struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
-    //@State private var stateSymbol = ""
+    @State private var stateSymbol = "" // 선택한 시간에 따라 출력되는 심볼
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -61,25 +61,35 @@ struct ContentView: View {
                     .rotationEffect(.degrees(-90))
 
                 
-                VStack {
+                VStack (){
+                    Spacer()
+                    Spacer()
                     Button {
                         switch timeRemaining {
                         case 0..<180:
                             timeRemaining = 180
+                            stateSymbol = "figure.walk"
                         case 180..<300:
                             timeRemaining = 300
+                            stateSymbol = "figure.walk"
                         case 300..<420:
                             timeRemaining = 420
+                            stateSymbol = "bicycle"
                         case 420..<600:
                             timeRemaining = 600
+                            stateSymbol = "bicycle"
                         case 600..<900:
                             timeRemaining = 900
+                            stateSymbol = "car.fill"
                         case 900..<1200:
                             timeRemaining = 1200
+                            stateSymbol = "car.fill"
                         case 1200..<1500:
                             timeRemaining = 1500
+                            stateSymbol = "train.side.front.car"
                         case 1500..<1800:
                             timeRemaining = 1800
+                            stateSymbol = "train.side.front.car"
                         default:
                             timeRemaining = 0
                         }
@@ -88,7 +98,13 @@ struct ContentView: View {
                             .font(.system(size: 20, weight: .bold))
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .padding(5)
+                    .padding(-10)
+                    
+                    Image(systemName: stateSymbol)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20, height: 20)
+                        .padding(5)
                     
                     Button {
                         isRunning.toggle()
@@ -96,6 +112,7 @@ struct ContentView: View {
                         Image(systemName: isRunning ? "pause" : "play.fill")
                             .font(.system(size: 15, weight: .bold))
                     } .buttonStyle(PlainButtonStyle())
+                    Spacer()
                 }
             }
         }
