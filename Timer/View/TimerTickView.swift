@@ -8,8 +8,34 @@
 import SwiftUI
 
 struct TimerTickView: View {
+    private let totalTime: Int
+    private let remainingTime: Int
+    
+    init(totalTime: Int, remainingTime: Int) {
+        self.totalTime = totalTime
+        self.remainingTime = remainingTime
+    }
+    
+    init() {
+        self.totalTime = 0
+        self.remainingTime = 0
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Circle()
+            .trim(
+                from: 0,
+                to: CGFloat(remainingTime) / CGFloat(totalTime)
+            )
+            .stroke(
+                style: .init(
+                    lineWidth: 8,
+                    dash: [1, 3]
+                )
+            )
+            .rotation(.degrees(-90))
+            .foregroundStyle(.accent)
+            .padding()
     }
 }
 
