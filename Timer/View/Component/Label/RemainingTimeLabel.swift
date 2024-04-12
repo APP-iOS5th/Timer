@@ -16,7 +16,7 @@ struct RemainingTimeLabel: View {
     
     var body: some View {
         Text("\(String(format: "%02d", remainingTime / 60)):\(String(format: "%02d", remainingTime % 60))")
-            .font(.system(size: 40, weight: .bold))
+            .font(.system(size: 60, weight: .bold))
             .foregroundStyle(.gray)
     }
 }
