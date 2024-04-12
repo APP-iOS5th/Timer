@@ -10,7 +10,14 @@ import Combine
 
 @Observable
 final class TimerViewModel {
-    private let timer = Timer.publish(every: 0.1, on: .main, in: .default).autoconnect()
+    @ObservationIgnored
+    private lazy var timer: AnyPublisher<Date, Never> = {
+        if self.initialTime > 120 {
+            return Timer.publish(every: 1, on: .main, in: .default).autoconnect().eraseToAnyPublisher()
+        } else {
+            return Timer.publish(every: 0.1, on: .main, in: .default).autoconnect().eraseToAnyPublisher()
+        }
+    }()
     private var cancellable: AnyCancellable?
     
     // MARK: States
