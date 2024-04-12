@@ -53,26 +53,25 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Picker(selection: $choice, label: Text("선택해주세요")){
-                Text("🏃🏻‍➡️").tag("🏃🏻‍➡️")
-                Text("🏃🏻‍♀️‍➡️").tag("🏃🏻‍♀️‍➡️")
-                Text("🏃🏻‍♂️‍➡️").tag("🏃🏻‍♂️‍➡️")
-                Text("🦍").tag("🦍")
-                Text("🐈").tag("🐈")
-                Text("🐕").tag("🐕")
+                Text("🏃🏻‍♀️").font(.system(size: 13)).tag("🏃🏻‍♀️")
+                Text("🏃🏻").font(.system(size: 13)).tag("🏃🏻")
+                Text("🐬").font(.system(size: 13)).tag("🐬")
+                Text("🦍").font(.system(size: 13)).tag("🦍")
+                Text("🐈").font(.system(size: 13)).tag("🐈")
+                Text("🐕").font(.system(size: 13)).tag("🐕")
                 
             }
-            .frame(width: 140)
+            .frame(width: 170)
             Spacer()
             Spacer()
             Spacer()
             ZStack{
                 Circle()
                     .trim(from: 0, to: CGFloat(timeRemaining)/(30 * 60)) //특정 부분만 남기고 나머지 부분 절단
-                    .stroke(Color.gray.opacity(0.2), lineWidth: 20)
+                    .stroke(Color.gray.opacity(0.0), lineWidth: 20)
                     .rotationEffect(.degrees(-90))
-                Text("\(choice)")
-                    .rotationEffect(.degrees(Double(timeRemaining)/(30 * 60 )))
-                    .offset(y: -50)
+                    .overlay(Text("\(choice)").offset(y:-50).rotationEffect(.degrees(Double(timeRemaining) / (30 * 60) * 360)))
+                    
                 VStack {
                     Button{
                         switch timeRemaining {
@@ -92,8 +91,6 @@ struct ContentView: View {
                             timeRemaining = 1500
                         case 1500..<1800:
                             timeRemaining = 1800
-                        case 1800..<2100:
-                            timeRemaining = 2100
                         default:
                             timeRemaining = 0
                         }
@@ -109,12 +106,17 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: isRunning ? "pause" : "play.fill")
                     }
+                    Button{
+                        timeRemaining = 0
+                    }label: {
+                        Text("Reset")
+                    }
                 }
                 
             }
 
         }
-        .frame(width: 200, height: 150)
+        .frame(width: 200, height: 200)
         .padding()
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         //타이머 동작하는 클로저
