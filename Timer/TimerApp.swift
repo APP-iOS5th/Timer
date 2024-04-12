@@ -11,7 +11,8 @@ import SwiftUI
 struct TimerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TimerListView()
         }
+        .windowResizability(.contentSize)
     }
 }
