@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct TimerCell: View {
-    private let totalTime: Int
-    private let remainingTime: Int
+    private let totalTime: Double
+    private let remainingTime: Double
     
-    init(totalTime: Int, remainingTime: Int) {
+    init(totalTime: Double, remainingTime: Double) {
         self.totalTime = totalTime
         self.remainingTime = remainingTime
     }
     
-    init(_ time: Int) {
+    init(_ time: Double) {
         self.totalTime = time
         self.remainingTime = time
     }
@@ -26,7 +26,7 @@ struct TimerCell: View {
             TimerTickView(totalTime: totalTime, remainingTime: remainingTime)
             Circle()
                 .rotation(.degrees(-90))
-                .foregroundStyle(Color("DarkGray"))
+                .foregroundStyle(Color.deepGray)
                 .padding(20)
             InitialTimeLabel(time: totalTime)
         }

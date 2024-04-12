@@ -10,15 +10,15 @@ import Combine
 
 @Observable
 final class TimerViewModel {
-    private let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
+    private let timer = Timer.publish(every: 0.1, on: .main, in: .default).autoconnect()
     private var cancellable: AnyCancellable?
     
     // MARK: States
-    private(set) var initialTime: Int
-    private(set) var remainingTime: Int
+    private(set) var initialTime: Double
+    private(set) var remainingTime: Double
     private(set) var timerState: TimerState
     
-    init(initialTime: Int, remainingTime: Int, timerState: TimerState = .stop) {
+    init(initialTime: Double, remainingTime: Double, timerState: TimerState = .stop) {
         self.initialTime = initialTime
         self.remainingTime = remainingTime
         self.timerState = timerState
@@ -45,7 +45,7 @@ final class TimerViewModel {
 private extension TimerViewModel {
     func elapse(_ date: Date) {
         if self.timerState == .run && self.remainingTime > 0 {
-            remainingTime -= 1
+            remainingTime -= 0.1
         } else if timerState == .run {
             timerState = .stop
         }

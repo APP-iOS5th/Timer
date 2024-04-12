@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct TimerTickView: View {
-    private let totalTime: Int
-    private let remainingTime: Int
+    private let totalTime: Double
+    private let remainingTime: Double
+    private var progress: Double {
+        remainingTime / totalTime
+    }
     
-    init(totalTime: Int, remainingTime: Int) {
+    init(totalTime: Double, remainingTime: Double) {
         self.totalTime = totalTime
         self.remainingTime = remainingTime
     }
@@ -25,7 +28,7 @@ struct TimerTickView: View {
         Circle()
             .trim(
                 from: 0,
-                to: CGFloat(remainingTime) / CGFloat(totalTime)
+                to: progress
             )
             .stroke(
                 style: .init(
@@ -36,6 +39,7 @@ struct TimerTickView: View {
             .rotation(.degrees(-90))
             .foregroundStyle(.accent)
             .padding()
+            .animation(.linear(duration: 0.1), value: progress)
     }
 }
 

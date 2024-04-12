@@ -9,9 +9,9 @@ import Foundation
 
 struct TimerInfo: Hashable, Identifiable {
     let id: UUID
-    let time: Int
+    let time: Double
     
-    init(id: UUID = UUID(), time: Int) {
+    init(id: UUID = UUID(), time: Double) {
         self.id = id
         self.time = time
     }

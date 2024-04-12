@@ -10,8 +10,8 @@ import SwiftUI
 struct InitialTimeLabel: View {
     private let time: Int
     
-    init(time: Int) {
-        self.time = time
+    init(time: Double) {
+        self.time = Int(time)
     }
     
     var body: some View {

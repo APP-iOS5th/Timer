@@ -10,8 +10,8 @@ import SwiftUI
 struct RemainingTimeLabel: View {
     private let remainingTime: Int
     
-    init(remainingTime: Int) {
-        self.remainingTime = remainingTime
+    init(remainingTime: Double) {
+        self.remainingTime = Int(remainingTime)
     }
     
     var body: some View {
