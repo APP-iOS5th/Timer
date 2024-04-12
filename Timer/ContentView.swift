@@ -48,20 +48,20 @@ struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 10 //타이머의 남은 시간을 추적
     @State private var choice = ""
+    @State private var showAlert = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         VStack {
-            Picker(selection: $choice, label: Text("선택해주세요")){
-                Text("🏃🏻‍♀️").font(.system(size: 13)).tag("🏃🏻‍♀️")
-                Text("🏃🏻").font(.system(size: 13)).tag("🏃🏻")
-                Text("🐬").font(.system(size: 13)).tag("🐬")
-                Text("🦍").font(.system(size: 13)).tag("🦍")
-                Text("🐈").font(.system(size: 13)).tag("🐈")
-                Text("🐕").font(.system(size: 13)).tag("🐕")
-                
-            }
-            .frame(width: 170)
+                Picker(selection: $choice, label: Text("선택해주세요")){
+                    Text("🏃🏻‍♀️").font(.system(size: 13)).tag("🏃🏻‍♀️")
+                    Text("🏃🏻").font(.system(size: 13)).tag("🏃🏻")
+                    Text("🐬").font(.system(size: 13)).tag("🐬")
+                    Text("🦍").font(.system(size: 13)).tag("🦍")
+                    Text("🐈").font(.system(size: 13)).tag("🐈")
+                    Text("🐕").font(.system(size: 13)).tag("🐕")
+                }
+                .frame(width: 160)
             Spacer()
             Spacer()
             Spacer()
@@ -77,11 +77,11 @@ struct ContentView: View {
                         switch timeRemaining {
                         case 0..<180:
                             timeRemaining = 180
-                        case 180..<360:
-                            timeRemaining = 360
-                        case 360..<420:
-                            timeRemaining = 420
-                        case 420..<600:
+                        case 180..<300:
+                            timeRemaining = 300
+                        case 300..<480:
+                            timeRemaining = 480
+                        case 480..<600:
                             timeRemaining = 600
                         case 600..<900:
                             timeRemaining = 900
@@ -123,6 +123,9 @@ struct ContentView: View {
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
+                if timeRemaining <= 10 {
+                    showAlert = true
+                }
                 if timeRemaining <= 5 {
                     NSSound.beep()
                 }
@@ -130,7 +133,12 @@ struct ContentView: View {
             else if isRunning {
                 isRunning = false
             }
-        }
+        }.alert(isPresented: $showAlert, content: {
+            Alert(title: Text("!!!"), message: Text("10초남았습니다!!!!"),
+                  dismissButton: .default(Text("OK"))
+            )
+        })
+
     }
 }
 
