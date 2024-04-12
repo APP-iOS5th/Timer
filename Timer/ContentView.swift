@@ -29,6 +29,7 @@ struct ContentView: View {
     @State private var initialMinutes = 1
     @State private var remainingSeconds = 10
     @State private var isRunning = false
+    @State private var countDownOpacity = 0.0
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let speechSynthesizer = AVSpeechSynthesizer()
@@ -48,6 +49,10 @@ struct ContentView: View {
                     .trim(from: 0, to: CGFloat(remainingSeconds) / (CGFloat(initialMinutes) * 60))
                     .stroke(Color.red, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
+                Circle()
+                    .stroke(Color.yellow, lineWidth: 10)
+                    .opacity(countDownOpacity)
+                    .animation(isRunning ? .easeInOut(duration: 0.5).repeatForever() : Animation.default, value: countDownOpacity)
                     
                 VStack {
                     Text("\(remainingSeconds / 60) : \(String(format: "%02d", remainingSeconds % 60))")
@@ -85,10 +90,12 @@ struct ContentView: View {
             }
             if remainingSeconds < 4 && remainingSeconds > 0 {
                 speech("\(remainingSeconds)")
+                countDownOpacity = 0.5
             }
             if remainingSeconds == 0 && isRunning {
                 speech("Stop")
                 remainingSeconds = initialMinutes * 60
+                countDownOpacity = 0.0
                 isRunning = false
             }
         }
