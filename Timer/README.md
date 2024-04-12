@@ -1,10 +1,8 @@
 10초 증감 타이머
 =============
 
-![alt text](image.png)
-![alt text](image-1.png)
-<img src="image.png" width="50"/>
-<img src="image-1png" width="50"/>
+<img src="image.png" width="100"/>
+<img src="image-1.png" width="100"/>
 
 - 좌표이동 애니메이션 용 아이콘 : airplane
 - 종료임박 애니메이션 용 아이콘 : airplane.arrival
@@ -105,8 +103,17 @@ func timerAction() {
  - 버튼 클릭과 타이머의 시작 및 종료 때, 비행기 위치 초기화
 
 
+## 뷰
+```swift
+// 1
+Image(systemName: animeIconName)
+    .offset(x: animeIconPositionX, y: 0)
+    .animation(.linear(duration: 1.5), value: animeIconPositionX)
+```
 
-
+1. 이미지 애니메이션
+ - 비행기가 좌에서 우로 이동
+ - 리니어, 속도 1.5초
 
 
 
