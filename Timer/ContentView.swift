@@ -51,25 +51,34 @@ struct ContentView: View {
     @State private var addTime2 = 5
     @State private var reduceTime = 1
     @State private var flag = false
+    @State private var myColor = Color.gray.opacity(0.2)
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
                 ZStack {
-                    //버튼 시간 조정하기
-                    Button(action: {
-                        flag.toggle()
-                    }, label: {
-                        Text(flag ? "완 료" : "버튼 수정")
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                            .frame(width: 45)
-                    })
-                    .padding(5)
-                    .foregroundColor(.blue)
-                    .background(Color.white)
-                    .cornerRadius(10.0)
-                    .offset(CGSize(width: -98.0, height: -70.0))
+                    VStack(alignment: .leading) {
+                        //버튼 시간 조정하기
+                        Button(action: {
+                            flag.toggle()
+                        }, label: {
+                            Text(flag ? "완 료" : "버튼 수정")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .frame(width: 45)
+                        })
+                        .padding(5)
+                        .foregroundColor(.blue)
+                        .background(Color.white)
+                        .cornerRadius(10.0)
+                        
+                        // 색상 바꾸기 기능 미완성
+                        ColorPicker(selection: $myColor, label: {})
+                        .foregroundColor(.blue)
+                        .background(Color.white)
+                        .cornerRadius(10.0)
+                    }.offset(CGSize(width: -95.0, height: -55.0))
+                    
                     
                     // 가운데 타이머 원
                     Circle()
