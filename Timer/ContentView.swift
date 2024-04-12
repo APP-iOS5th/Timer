@@ -33,7 +33,7 @@ class SoundManager {
     var player: AVAudioPlayer?
     
     func playSound() {
-        guard let url = Bundle.main.url(forResource: "Beep", withExtension: "mov") else { return }
+        guard let url = Bundle.main.url(forResource: "Ring", withExtension: "mp3") else { return }
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
@@ -44,10 +44,13 @@ class SoundManager {
     }
 }
 
+let endSound = SoundManager.instance
 
 struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
+    @State private var initialTime = 0
+
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -58,15 +61,19 @@ struct ContentView: View {
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                 
                 Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
+                    .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat(initialTime))
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
+                
+                
                 
                 VStack {
                     Button {
                         switch timeRemaining {
-                        case 0..<180:
-                            timeRemaining = 180
+                        case 0..<60:
+                            timeRemaining = 60
+                        case 60..<180:
+                            timeRemaining = 300
                         case 180..<300:
                             timeRemaining = 300
                         case 300..<420:
@@ -84,6 +91,7 @@ struct ContentView: View {
                         default:
                             timeRemaining = 0
                         }
+                        initialTime = timeRemaining
 
                     } label: {
                         Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
@@ -97,7 +105,6 @@ struct ContentView: View {
                     }
                 }
             }
-                
         }
         .frame(width: 100, height: 100)
         .padding()
@@ -110,6 +117,7 @@ struct ContentView: View {
                 }
             } else if isRunning {
                 isRunning = false
+                endSound.playSound()
             }
         }
     }
@@ -118,3 +126,7 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+
+//CC0 1.0 Universal made by DayDreamSound
+//https://youtu.be/kfnh9QAfDgA
