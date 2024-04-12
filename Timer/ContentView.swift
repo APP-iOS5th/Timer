@@ -45,7 +45,7 @@ class SoundManager {
 struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
-    @State private var stateSymbol = "" // 선택한 시간에 따라 출력되는 심볼
+    @State private var stateSymbol = "timer" // 선택한 시간에 따라 출력되는 심볼
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -55,7 +55,7 @@ struct ContentView: View {
             ZStack {
 
                 Circle()
-                    .stroke(Color.white.opacity(0.2), lineWidth: 10) //기본 틀
+                    .stroke(Color.white.opacity(0.3), lineWidth: 10) //기본 틀
                 
                 Circle()
                     .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
@@ -94,14 +94,17 @@ struct ContentView: View {
                             stateSymbol = "train.side.front.car"
                         default:
                             timeRemaining = 0
-                            stateSymbol = ""
+                            stateSymbol = "timer"
                         }
                     } label: {
                         Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
                             .font(.system(size: 20, weight: .bold))
+                            .foregroundColor((timeRemaining <= 10 && timeRemaining % 2 == 1) ? .black : .white) //역시나 10초 이하일 때 남은 시간 색 변경
                     }
                     .buttonStyle(PlainButtonStyle())
                     .padding(-10)
+                    .scaleEffect((timeRemaining <= 10 && timeRemaining % 2 == 1) ? 1.5 : 1) //10초 이하일 때 크기 변경
+                    .animation(.default, value: timeRemaining)
                 
                    
                     Image(systemName: stateSymbol)
@@ -109,7 +112,7 @@ struct ContentView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 20, height: 20)
                         .padding(6)
-                        .scaleEffect((timeRemaining <= 10 && timeRemaining % 2 == 1) ? 1.75 : 1) //10초 이하일 때 크기 변경
+                        .scaleEffect((timeRemaining <= 10 && timeRemaining % 2 == 1) ? 0.75 : 1) //10초 이하일 때 크기 변경
                         .animation(.default, value: timeRemaining)
                     
                     Button {
