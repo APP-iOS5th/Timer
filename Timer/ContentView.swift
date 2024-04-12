@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import AVFoundation
+
 
 
 struct AlwaysOnTopView: NSViewRepresentable {
@@ -28,26 +28,30 @@ struct AlwaysOnTopView: NSViewRepresentable {
 }
 
 
-class SoundManager {
-    static let instance = SoundManager()
-    var player: AVAudioPlayer?
-    
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "Beep", withExtension: "mov") else { return }
-        
-        do {
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.play()
-        } catch let error {
-            print("재생하는데 오류가 발생했습니다. \(error.localizedDescription)")
-        }
-    }
-}
 
 
 struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
+    
+    
+    func resetB() {
+        timeRemaining = 0}
+    
+    func increment() {
+        timeRemaining += 10
+    }
+    
+    func decrement() {
+        if timeRemaining <= 9 {
+            return timeRemaining = 0
+        } else {
+            timeRemaining -= 10}}
+        
+
+            
+            
+    
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -55,59 +59,70 @@ struct ContentView: View {
         VStack {
             ZStack {
                 Circle()
-                    .stroke(Color.gray.opacity(0.2), lineWidth: 10)
+                    .stroke(Color.gray.opacity(0.3), lineWidth: 15)
+                    .frame(width:230, height: 230)
+
                 
                 Circle()
                     .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
-                
-                VStack {
-                    Button {
-                        switch timeRemaining {
-                        case 0..<180:
-                            timeRemaining = 180
-                        case 180..<300:
-                            timeRemaining = 300
-                        case 300..<420:
-                            timeRemaining = 420
-                        case 300..<600:
-                            timeRemaining = 600
-                        case 600..<900:
-                            timeRemaining = 900
-                        case 900..<1200:
-                            timeRemaining = 1200
-                        case 1200..<1500:
-                            timeRemaining = 1500
-                        case 1500..<1800:
-                            timeRemaining = 1800
-                        default:
-                            timeRemaining = 0
-                        }
+                    .frame(width:230, height: 230)
 
-                    } label: {
-                        Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                            .font(.system(size: 20, weight: .bold))
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    Button {
-                        isRunning.toggle()
-                    } label: {
-                        Image(systemName: isRunning ? "pause" : "play.fill")
+                VStack {
+                    
+                    Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))").font(.system(size: 30, weight: .bold))
+                    
+                    
+                    HStack{
+                        VStack{
+                            Button {
+                                isRunning.toggle()
+                            } label: {
+                                Image(systemName: isRunning ? "pause" : "play.fill")
+                                Text("Start/Stop")}
+                            Button {
+                                resetB()
+                            } label: {
+                                Image(systemName: isRunning ? "stop.circle.fill" : "stop.circle.fill")
+                                Text("r e    s e t")
+                            }
+                            
+                            
+                        }
+                        VStack{
+                            VStack {
+                                Button {
+                                    increment()
+                                } label: {
+                                    Image(systemName: isRunning ? "plus.circle.fill" : "plus.circle.fill")
+                                    Text("+10sec")
+                                }
+                                
+                            }
+                            VStack{
+                                Button {
+                                    decrement()
+                                } label: {
+                                    Image(systemName: isRunning ? "minus.circle.fill" : "minus.circle.fill")
+                                    Text("-10sec")
+                                }
+                                
+                            }
+                            
+                        }
                     }
                 }
             }
-                
+            
         }
-        .frame(width: 100, height: 100)
+        .frame(width: 250, height: 250)
         .padding()
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
-                if timeRemaining <= 10 {
-                    NSSound.beep()
-                }
+                
             } else if isRunning {
                 isRunning = false
             }
