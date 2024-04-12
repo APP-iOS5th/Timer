@@ -11,6 +11,8 @@
 		78C556DE2BC8BFC0006D3547 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C556DD2BC8BFC0006D3547 /* ContentView.swift */; };
 		78C556E02BC8BFC3006D3547 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78C556DF2BC8BFC3006D3547 /* Assets.xcassets */; };
 		78C556E32BC8BFC3006D3547 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78C556E22BC8BFC3006D3547 /* Preview Assets.xcassets */; };
+		78C556EE2BC92738006D3547 /* endPractice.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78C556EC2BC92737006D3547 /* endPractice.mp3 */; };
+		78C556EF2BC92738006D3547 /* startPractice.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78C556ED2BC92738006D3547 /* startPractice.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		78C556DF2BC8BFC3006D3547 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78C556E22BC8BFC3006D3547 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		78C556E42BC8BFC3006D3547 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
+		78C556EC2BC92737006D3547 /* endPractice.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = endPractice.mp3; sourceTree = "<group>"; };
+		78C556ED2BC92738006D3547 /* startPractice.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = startPractice.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 				78C556DB2BC8BFC0006D3547 /* TimerApp.swift */,
 				78C556DD2BC8BFC0006D3547 /* ContentView.swift */,
 				78C556DF2BC8BFC3006D3547 /* Assets.xcassets */,
+				78C556EC2BC92737006D3547 /* endPractice.mp3 */,
+				78C556ED2BC92738006D3547 /* startPractice.mp3 */,
 				78C556E42BC8BFC3006D3547 /* Timer.entitlements */,
 				78C556E12BC8BFC3006D3547 /* Preview Content */,
 			);
@@ -127,7 +133,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78C556EF2BC92738006D3547 /* startPractice.mp3 in Resources */,
 				78C556E32BC8BFC3006D3547 /* Preview Assets.xcassets in Resources */,
+				78C556EE2BC92738006D3547 /* endPractice.mp3 in Resources */,
 				78C556E02BC8BFC3006D3547 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +279,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Timer/Timer.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -296,6 +305,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Timer/Timer.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

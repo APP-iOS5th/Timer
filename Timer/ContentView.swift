@@ -29,9 +29,10 @@ struct AlwaysOnTopView: NSViewRepresentable {
 class SoundManager {
     static let instance = SoundManager()
     var player: AVAudioPlayer?
+    var startEndDivision = ""
     
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "Beep", withExtension: "mov") else { return }
+    func playSound(division soundName: String) {
+        guard let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") else { return }
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
@@ -99,6 +100,7 @@ struct ContentView: View {
                     
                     Button {
                         isRunning.toggle()
+                        SoundManager.instance.playSound(division: "startPractice")
                     } label: {
                         Image(systemName: isRunning ? "pause.circle.fill" : "play.circle.fill")
                     }
@@ -198,6 +200,7 @@ struct ContentView: View {
                         NSSound.beep()
                     }
                 } else if isRunning {
+                    SoundManager.instance.playSound(division: "endPractice")
                     isRunning = false
                 }
             }
