@@ -11,6 +11,8 @@
 		589A083F2BC8BFAD00D0C2C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589A083E2BC8BFAD00D0C2C0 /* ContentView.swift */; };
 		589A08412BC8BFAE00D0C2C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589A08402BC8BFAE00D0C2C0 /* Assets.xcassets */; };
 		589A08442BC8BFAE00D0C2C0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589A08432BC8BFAE00D0C2C0 /* Preview Assets.xcassets */; };
+		589A084C2BC8ECE100D0C2C0 /* alarmList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589A084B2BC8ECE100D0C2C0 /* alarmList.swift */; };
+		589A084E2BC8F32400D0C2C0 /* alarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589A084D2BC8F32400D0C2C0 /* alarmModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		589A08402BC8BFAE00D0C2C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		589A08432BC8BFAE00D0C2C0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		589A08452BC8BFAE00D0C2C0 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
+		589A084B2BC8ECE100D0C2C0 /* alarmList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alarmList.swift; sourceTree = "<group>"; };
+		589A084D2BC8F32400D0C2C0 /* alarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alarmModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				589A083C2BC8BFAD00D0C2C0 /* TimerApp.swift */,
 				589A083E2BC8BFAD00D0C2C0 /* ContentView.swift */,
+				589A084D2BC8F32400D0C2C0 /* alarmModel.swift */,
+				589A084B2BC8ECE100D0C2C0 /* alarmList.swift */,
 				589A08402BC8BFAE00D0C2C0 /* Assets.xcassets */,
 				589A08452BC8BFAE00D0C2C0 /* Timer.entitlements */,
 				589A08422BC8BFAE00D0C2C0 /* Preview Content */,
@@ -140,6 +146,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				589A083F2BC8BFAD00D0C2C0 /* ContentView.swift in Sources */,
+				589A084E2BC8F32400D0C2C0 /* alarmModel.swift in Sources */,
+				589A084C2BC8ECE100D0C2C0 /* alarmList.swift in Sources */,
 				589A083D2BC8BFAD00D0C2C0 /* TimerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

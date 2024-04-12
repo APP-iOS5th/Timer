@@ -13,6 +13,10 @@ struct ContentView: View {
     @State private var timeRemaining = 0
     @State private var defaultTime = 0
     
+    @State private var alarmAry: [alarmModel] = []
+    
+    @State var isClicked: Bool = false
+    
     // every 마다 이벤트를 발생시킴
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -28,15 +32,26 @@ struct ContentView: View {
                         , lineWidth: 10)
                     .rotationEffect(.degrees(-90))
                     .animation(Animation.linear(duration: 1), value: timeRemaining)
-                Button(action: {
-                    timeRemaining += 10
-                    defaultTime += 10
-                }) {
-                    Image(systemName: "10.circle")
-                        .font(.system(size: 25))
+                HStack {
+                    Button(action: {
+                        timeRemaining += 10
+                        defaultTime += 10
+                    }) {
+                        Image(systemName: "10.circle")
+                            .font(.system(size: 25))
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    Spacer()
+                    Button(action: {
+                        alarmAry.append(alarmModel(id: UUID(), min: timeRemaining / 60, sec: timeRemaining % 60))
+                    }) {
+                        Image(systemName: "plus.circle")
+                            .font(.system(size: 25))
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
-                .buttonStyle(PlainButtonStyle())
-                .position(x: 7, y: 7)
+                .frame(width: 220)
+                .position(x: 100, y: 5)
                 VStack(spacing: 10) {
                     Text("\(String(format: "%02d", timeRemaining / 60)) : \(String(format: "%02d", timeRemaining % 60))")
                         .font(.system(size: 35, weight: .bold))
@@ -94,6 +109,17 @@ struct ContentView: View {
                     NSSound.beep()
                 }
             }
+            Rectangle()
+                .frame(width: 200, height: 1)
+                .opacity(0.2)
+            ForEach(alarmAry, id: \.id) { data in
+                alarmList(alarmAry: $alarmAry, min: data.min, sec: data.sec, index: alarmAry.firstIndex(of: data) ?? 0)
+                    .onTapGesture {
+                        timeRemaining = (data.min * 60) + data.sec
+                        defaultTime = timeRemaining
+                        isRunning = false
+                    }
+            }
         }
     }
 }
@@ -115,6 +141,7 @@ struct AlwaysOnTopView: NSViewRepresentable {
         }
     }
 }
+
 
 #Preview {
     ContentView()
