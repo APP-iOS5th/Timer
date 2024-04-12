@@ -47,13 +47,28 @@ struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
     @State private var totalTime = 0
-    
+    @State private var addTime1 = 1
+    @State private var addTime2 = 5
+    @State private var reduceTime = 1
+    @State private var flag = false
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
-            
                 ZStack {
+                    Button(action: {
+                        flag.toggle()
+                    }, label: {
+                        Text(flag ? "완 료" : "버튼 수정")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .frame(width: 45)
+                    })
+                    .padding(5)
+                    .foregroundColor(.blue)
+                    .background(Color.white)
+                    .cornerRadius(10.0)
+                    .offset(CGSize(width: -98.0, height: -70.0))
                     Circle()
                         .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                         .frame(width: 100, height: 100)
@@ -81,41 +96,68 @@ struct ContentView: View {
 
                     VStack(spacing: 10) {
                         Button {
-                            timeRemaining += 60
-                            totalTime += 60
+                            timeRemaining += addTime1 * 60
+                            totalTime += addTime1 * 60
                         } label: {
                             VStack{
                                 Image(systemName: "timer.square")
                                     .font(.title)
-                                Text("+1m")
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
+                                if flag {
+                                    Stepper(value: $addTime1, in: 1...10) {
+                                        Text("+\(addTime1)m")
+                                            .font(.subheadline)
+                                            .fontWeight(.bold)
+                                    }
+                                }
+                                else {
+                                    Text("+\(addTime1)m")
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                }
                             }
                         }
                         Button {
-                            timeRemaining += 300
-                            totalTime += 300
+                            timeRemaining += addTime2 * 60
+                            totalTime += addTime2 * 60
                         } label: {
                             VStack{
                                 Image(systemName: "timer.square")
                                     .font(.title)
-                                Text("+5m")
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
+                                if flag {
+                                    Stepper(value: $addTime2, in: 5...60, step: 3) {
+                                        Text("+\(addTime2)m")
+                                            .font(.subheadline)
+                                            .fontWeight(.bold)
+                                    }
+                                }
+                                else {
+                                    Text("+\(addTime2)m")
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                }
                             }
                         }
                         Button {
-                            if timeRemaining >= 60 {
-                                timeRemaining -= 60
-                                totalTime -= 60
+                            if timeRemaining >= reduceTime * 60 {
+                                timeRemaining -= reduceTime * 60
+                                totalTime -= reduceTime * 60
                             }
                         } label: {
                             VStack{
                                 Image(systemName: "timer.square")
                                     .font(.title)
-                                Text("-1m")
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
+                                if flag {
+                                    Stepper(value: $reduceTime, in: 1...60) {
+                                        Text("-\(reduceTime)m")
+                                            .font(.subheadline)
+                                            .fontWeight(.bold)
+                                    }
+                                }
+                                else {
+                                    Text("-\(reduceTime)m")
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                }
                             }.foregroundColor(.red)
                         }
                     }
@@ -138,7 +180,7 @@ struct ContentView: View {
                         .font(.title)
                 }
             }
-            .offset(CGSize(width: 0.0, height: 10.0))
+            .offset(CGSize(width: 0.0, height: flag ? -3.5 : 10.0))
             .frame(width: 100)
         }
         .buttonStyle(PlainButtonStyle())
