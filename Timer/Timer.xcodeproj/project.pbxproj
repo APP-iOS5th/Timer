@@ -11,6 +11,7 @@
 		53012BAC2BC8CD730079D1F9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53012BAB2BC8CD730079D1F9 /* ContentView.swift */; };
 		53012BAE2BC8CD740079D1F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53012BAD2BC8CD740079D1F9 /* Assets.xcassets */; };
 		53012BB12BC8CD740079D1F9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53012BB02BC8CD740079D1F9 /* Preview Assets.xcassets */; };
+		53012BB92BC8D1C20079D1F9 /* Beep.mov in Resources */ = {isa = PBXBuildFile; fileRef = 53012BB82BC8D1C20079D1F9 /* Beep.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		53012BAD2BC8CD740079D1F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53012BB02BC8CD740079D1F9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		53012BB22BC8CD740079D1F9 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
+		53012BB82BC8D1C20079D1F9 /* Beep.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Beep.mov; path = ../../../../Downloads/Beep.mov; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				53012BA92BC8CD730079D1F9 /* TimerApp.swift */,
 				53012BAB2BC8CD730079D1F9 /* ContentView.swift */,
 				53012BAD2BC8CD740079D1F9 /* Assets.xcassets */,
+				53012BB82BC8D1C20079D1F9 /* Beep.mov */,
 				53012BB22BC8CD740079D1F9 /* Timer.entitlements */,
 				53012BAF2BC8CD740079D1F9 /* Preview Content */,
 			);
@@ -128,6 +131,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53012BB12BC8CD740079D1F9 /* Preview Assets.xcassets in Resources */,
+				53012BB92BC8D1C20079D1F9 /* Beep.mov in Resources */,
 				53012BAE2BC8CD740079D1F9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

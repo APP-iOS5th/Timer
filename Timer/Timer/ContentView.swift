@@ -6,11 +6,28 @@
 //
 
 import SwiftUI
+import AVFoundation
+
+class SoundManager {
+    static let instance = SoundManager()
+    var player: AVAudioPlayer?
+    
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "Beep", withExtension: "mov") else { return }
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+        } catch let error {
+            print("재생하는데 오류가 발생했습니다. \(error.localizedDescription)")
+        }
+    }
+}
 
 @available(iOS 15.0, *)
 struct ContentView: View {
     @State private var isRunning = false
-    @State private var timeRemaining = 2
+    @State private var timeRemaining = 5
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -42,6 +59,9 @@ struct ContentView: View {
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
+                if timeRemaining <= 10 {
+                    NSSound.beep()
+                }
             } else if isRunning {
                 isRunning = false
             }
