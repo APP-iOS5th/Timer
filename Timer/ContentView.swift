@@ -8,6 +8,26 @@
 import SwiftUI
 import AVFoundation
 
+
+struct AlwaysOnTopView: NSViewRepresentable {
+    let window: NSWindow
+    let isAlwaysOnTop: Bool
+    
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        return view
+    }
+    
+    func updateNSView(_ nsView: NSView, context: Context) {
+        if isAlwaysOnTop {
+            window.level = .floating
+        } else {
+            window.level = .normal
+        }
+    }
+}
+
+
 class SoundManager {
     static let instance = SoundManager()
     var player: AVAudioPlayer?
@@ -81,6 +101,7 @@ struct ContentView: View {
         }
         .frame(width: 100, height: 100)
         .padding()
+        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
