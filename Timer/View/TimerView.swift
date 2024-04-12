@@ -69,6 +69,6 @@ struct TimerView: View {
 
 #Preview {
     TimerView(
-        TimerInfo(time: 10)
+        TimerInfo(time: 120)
     )
 }

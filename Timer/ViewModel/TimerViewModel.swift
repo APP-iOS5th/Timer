@@ -11,12 +11,13 @@ import Combine
 @Observable
 final class TimerViewModel {
     @ObservationIgnored
+    private var elapsedInterval: Double {
+        if self.initialTime > 180 { 1.0 }
+        else { 0.1 }
+    }
+    @ObservationIgnored
     private lazy var timer: AnyPublisher<Date, Never> = {
-        if self.initialTime > 120 {
-            return Timer.publish(every: 1, on: .main, in: .default).autoconnect().eraseToAnyPublisher()
-        } else {
-            return Timer.publish(every: 0.1, on: .main, in: .default).autoconnect().eraseToAnyPublisher()
-        }
+        Timer.publish(every: elapsedInterval, on: .main, in: .default).autoconnect().eraseToAnyPublisher()
     }()
     private var cancellable: AnyCancellable?
     
@@ -52,7 +53,7 @@ final class TimerViewModel {
 private extension TimerViewModel {
     func elapse(_ date: Date) {
         if self.timerState == .run && self.remainingTime > 0 {
-            remainingTime -= 0.1
+            remainingTime -= elapsedInterval
         } else if timerState == .run {
             timerState = .stop
         }
