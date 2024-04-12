@@ -43,7 +43,7 @@ struct ContentView: View {
     @State private var timeRemaining = 10
     @State private var isOnTop = true
     @State private var startTime = 10
-    @State var widthValue: CGFloat = 80
+    @State var widthValue: CGFloat = 100
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -65,7 +65,7 @@ struct ContentView: View {
                 Button(){
                     isRunning.toggle()
                     timeRemaining = startTime
-                    widthValue = 80
+                    widthValue = 100
                 } label: {
                     if isRunning {
                         Image(systemName: "return")
@@ -91,7 +91,7 @@ struct ContentView: View {
                 
                 Image(systemName: "battery.0percent")
                     .resizable()
-                    .frame(width: 100, height: 60)
+                    .frame(width: 120, height: 60)
                     .foregroundColor(.white)
                 
                 VStack {
@@ -147,14 +147,14 @@ struct ContentView: View {
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
                 if widthValue >= 0{
-                    widthValue -= 80 / CGFloat(startTime)
+                    widthValue -= 100 / CGFloat(startTime)
                                 }
                 if timeRemaining <= 10 {
                     NSSound.beep()
                 }
             } else if isRunning {
                 isRunning = false
-                widthValue = 80
+                widthValue = 100
                 timeRemaining = startTime
                 
                 
