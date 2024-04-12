@@ -56,6 +56,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
                 ZStack {
+                    //버튼 시간 조정하기
                     Button(action: {
                         flag.toggle()
                     }, label: {
@@ -69,6 +70,8 @@ struct ContentView: View {
                     .background(Color.white)
                     .cornerRadius(10.0)
                     .offset(CGSize(width: -98.0, height: -70.0))
+                    
+                    // 가운데 타이머 원
                     Circle()
                         .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                         .frame(width: 100, height: 100)
@@ -81,7 +84,7 @@ struct ContentView: View {
                     
                     Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
                         .font(.system(size: 20, weight: .bold))
-                    
+                    // 거북이
                     VStack {
                         Image(systemName: "tortoise.fill")
                             .resizable()
@@ -94,6 +97,7 @@ struct ContentView: View {
                     .frame(width: 100, height: 100)
                     .rotationEffect(.degrees(totalTime != 0 ? Double(timeRemaining) / Double(totalTime) * 360 : 0.0))
 
+                    // 시간 추가, 감소 버튼
                     VStack(spacing: 10) {
                         Button {
                             timeRemaining += addTime1 * 60
@@ -163,6 +167,7 @@ struct ContentView: View {
                     }
                     .offset(CGSize(width: 100.0, height: 00.0))
                 }
+            // 재생, 정지 버튼
             HStack {
                 Button {
                     isRunning.toggle()
