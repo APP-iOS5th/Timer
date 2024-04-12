@@ -125,7 +125,8 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Timer")
-                .font(.system(size: 9))
+                .font(.system(size: 8))
+                .padding(.bottom, 3.0)
             
             Spacer()
             
@@ -138,39 +139,39 @@ struct ContentView: View {
                     .stroke(Color.white.opacity(0.5), lineWidth: 1.2)
                     .rotationEffect(.degrees(-90))
                 
-                Image("egg")
-                    .resizable()
-                    .frame(width: 85, height: 85)
+                Button {
+                    switch timeRemaining {
+                    case 0..<180:
+                        timeRemaining = 180
+                    case 180..<300:
+                        timeRemaining = 300
+                    case 300..<420:
+                        timeRemaining = 420
+                    case 300..<600:
+                        timeRemaining = 600
+                    case 600..<900:
+                        timeRemaining = 900
+                    case 900..<1200:
+                        timeRemaining = 1200
+                    case 1200..<1500:
+                        timeRemaining = 1500
+                    case 1500..<1800:
+                        timeRemaining = 1800
+                    default:
+                        timeRemaining = 0
+                    }
+                } label: {
+                    Image("egg")
+                        .resizable()
+                        .frame(width: 85, height: 85)
+                }
+                .buttonStyle(.borderless)
             }
             
             Spacer()
             
-            Button {
-                switch timeRemaining {
-                case 0..<180:
-                    timeRemaining = 180
-                case 180..<300:
-                    timeRemaining = 300
-                case 300..<420:
-                    timeRemaining = 420
-                case 300..<600:
-                    timeRemaining = 600
-                case 600..<900:
-                    timeRemaining = 900
-                case 900..<1200:
-                    timeRemaining = 1200
-                case 1200..<1500:
-                    timeRemaining = 1500
-                case 1500..<1800:
-                    timeRemaining = 1800
-                default:
-                    timeRemaining = 0
-                }
-            } label: {
-                Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                    .font(.system(size: 10))
-            }
-            .buttonStyle(PlainButtonStyle())
+            Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
+                .font(.system(size: 10))
             
             Button {
                 isRunning.toggle()
