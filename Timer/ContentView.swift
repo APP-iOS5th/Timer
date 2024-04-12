@@ -33,7 +33,7 @@ struct ContentView: View {
                 
                 Circle()
                     .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat((Int(userInput) ?? 0) * 60))
-                    .stroke(Color.purple, lineWidth: 10)
+                    .stroke(Color.indigo.opacity(50), lineWidth: 10)
                     .rotationEffect(.degrees(-90))
                 
                 
