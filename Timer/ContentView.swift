@@ -9,8 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var isRunning = false
-    @State private var timeRemaining = 100
+    @State private var isRunning = false // 타이머를 클릭해서 작동중인지 판단하는 변수
+    @State private var timeRemaining = 1
+    
+    //타이머 함수 1초마다 이벤트를 발생시킨다
+    let timer = Timer.publish(every: 1, on: .main , in: .common).autoconnect()
     
     var body: some View {
         VStack {
@@ -20,7 +23,7 @@ struct ContentView: View {
                 
                 Circle()
                     // trim은 시작위치가 오른쪽 90도
-                    .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
+                    .trim(from: 0, to: CGFloat(timeRemaining) / (5 * 60))
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90)) // -90도 돌려준다
                 
@@ -30,13 +33,21 @@ struct ContentView: View {
                     Button {
                         isRunning.toggle()
                     } label: {
-                        Image(systemName: isRunning ? "pause" : "play.fill")
+                        Image(systemName: isRunning ? "pause.fill" : "play.fill")
                     }
                 }
             }
         }
         .frame(width: 100, height: 100)
         .padding()
+        //view에서 지정된 publisher가 emit한 데이터를 감지할 때 수행할 작업을 추가
+        .onReceive(timer, perform: { _ in
+            if isRunning && timeRemaining > 0 {
+                timeRemaining -= 1
+            } else if isRunning {
+                isRunning = false
+            }
+        })
     }
 }
 
