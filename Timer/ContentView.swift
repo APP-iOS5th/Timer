@@ -19,7 +19,8 @@ struct AlwaysOnTopView: NSViewRepresentable {
     func updateNSView(_ nsView: NSView, context: Context) {
         if isAlwaysOnTop {
             window.level = .floating
-            window.backgroundColor = .clear
+            window.titlebarAppearsTransparent = true
+            window.backgroundColor = NSColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.3)
         } else {
             window.level = .normal
         }
@@ -27,7 +28,7 @@ struct AlwaysOnTopView: NSViewRepresentable {
 }
 struct ContentView: View {
     @State private var initialMinutes = 1
-    @State private var remainingSeconds = 5
+    @State private var remainingSeconds = 10
     @State private var isRunning = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
