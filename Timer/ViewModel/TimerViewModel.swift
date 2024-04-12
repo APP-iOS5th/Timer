@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import Combine
 
 @Observable
 class TimerViewModel {
     private let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
+    private var cancellable: AnyCancellable?
     
     // MARK: States
     private(set) var initialTime: Int
@@ -25,6 +27,8 @@ class TimerViewModel {
     // MARK: Actions and Reduces
     func start() {
         self.timerState = .run
+        cancellable = timer
+            .sink(receiveValue: elapse(_:))
     }
     
     func pause() {
@@ -33,5 +37,17 @@ class TimerViewModel {
     
     func stop() {
         self.timerState = .stop
+        self.remainingTime = self.initialTime
+        self.cancellable?.cancel()
+    }
+}
+
+private extension TimerViewModel {
+    func elapse(_ date: Date) {
+        if self.timerState == .run && self.remainingTime > 0 {
+            remainingTime -= 1
+        } else if timerState == .run {
+            timerState = .stop
+        }
     }
 }
