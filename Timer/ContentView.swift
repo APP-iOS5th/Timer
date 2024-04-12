@@ -46,12 +46,16 @@ struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
     @State private var stateSymbol = "" // 선택한 시간에 따라 출력되는 심볼
+    //@State private var alertColor
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
+        
         VStack {
+            
             ZStack {
+
                 Circle()
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10) //기본 틀
                 
@@ -92,6 +96,7 @@ struct ContentView: View {
                             stateSymbol = "train.side.front.car"
                         default:
                             timeRemaining = 0
+                            stateSymbol = ""
                         }
                     } label: {
                         Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
@@ -99,12 +104,15 @@ struct ContentView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .padding(-10)
-                    
+                
+                   
                     Image(systemName: stateSymbol)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 20, height: 20)
-                        .padding(5)
+                        .padding(6)
+                        .scaleEffect((timeRemaining <= 10 && timeRemaining % 2 == 0) ? 1.75 : 1) //10초 이하일 때 크기 변경
+                        .animation(.default, value: timeRemaining)
                     
                     Button {
                         isRunning.toggle()
@@ -128,8 +136,6 @@ struct ContentView: View {
             } else if isRunning {
                 isRunning = false
                 SoundManager.instance.playSound()
-//                Circle() //완료되면 빨간색으로 만들고 싶었다
-//                    .stroke(Color.red.opacity(0.9), lineWidth: 10)
             }
         }
     }
