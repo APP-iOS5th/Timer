@@ -43,7 +43,7 @@ struct ContentView: View {
     @State private var timeRemaining = 10
     @State private var isOnTop = true
     @State private var startTime = 10
-    @State var widthValue: CGFloat = 0
+    @State var widthValue: CGFloat = 80
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -146,8 +146,8 @@ struct ContentView: View {
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
-                if widthValue <= 80{
-                    widthValue += 80 / CGFloat(startTime)
+                if widthValue >= 0{
+                    widthValue -= 80 / CGFloat(startTime)
                                 }
                 if timeRemaining <= 10 {
                     NSSound.beep()
