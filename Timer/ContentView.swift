@@ -53,7 +53,7 @@ struct ContentView: View {
     
     
     // Timer Config
-    private let MAX_TIME = 11 * 60
+    private let MAX_TIME = 2 * 60
     private let MIN_TIME = 0
     private var TIMER_VALUE = 10
     
@@ -123,14 +123,14 @@ struct ContentView: View {
                     
                     
                     VStack {
-                        Image(systemName: animeIconName)
-                            .offset(x: animeIconPositionX, y: 0)
-                            .animation(.linear(duration: 1.5), value: animeIconPositionX)
-                        
                         Image(systemName: "square.fill")
                             .resizable()
                             .frame(width: 55, height: 1)
-                            .offset(y:1)
+                            .offset(y:-5)
+                        
+                        Image(systemName: animeIconName)
+                            .offset(x: animeIconPositionX, y: 0)
+                            .animation(.linear(duration: 1.5), value: animeIconPositionX)
                     }
                 }
             }
