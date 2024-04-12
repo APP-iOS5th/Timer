@@ -9,7 +9,9 @@ import SwiftUI
 
  struct ContentView: View {
      @State private var isRunning = false
-     @State private var timeRemaining = 100
+     @State private var timeRemaining = 1
+     
+     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
      var body: some View {
          VStack {
@@ -18,7 +20,7 @@ import SwiftUI
                      .stroke(Color.gray.opacity(0.2), lineWidth: 10)
 
                  Circle()
-                     .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
+                     .trim(from: 0, to: CGFloat(timeRemaining) / (5 * 60))
                      .stroke(Color.blue, lineWidth: 10)
                      .rotationEffect(.degrees(-90))
 
@@ -36,8 +38,16 @@ import SwiftUI
         }
         .frame(width: 100, height: 100)
         .padding()
-    }
-}
+        .onReceive(timer) { _ in
+            if isRunning && timeRemaining > 0 {
+                timeRemaining -= 1
+            } else if isRunning {
+                isRunning = false
+            }
+        }
+     }
+ }
+
 #Preview {
     ContentView()
 }
