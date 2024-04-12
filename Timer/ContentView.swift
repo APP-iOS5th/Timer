@@ -80,16 +80,27 @@ struct ContentView: View {
                         
                     } label: {
                         Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                            .font(.system(size: 20, weight: .bold))
+                            .font(.system(size: 35, weight: .bold))
                     }
                     .buttonStyle(.borderless)
-                    .offset(x:0, y: 22)
+                    .offset(x:0, y: 37)
                     Button {
                         isRunning.toggle()
                     } label: {
                         Image(systemName: isRunning ? "pause" : "play.fill")
                     }
-                    .offset(x: 0, y:25)
+                    .offset(x: 1, y:44)
+                    .font(.system(size: 20))
+                    .buttonStyle(.borderless)
+                    
+                    Button {
+                        timeRemaining = 0
+                    } label: {
+                        Image(systemName: "arrow.uturn.left")
+                    }
+                    .font(.system(size: 13))
+                    .buttonStyle(.borderless)
+                    .offset(x: 60, y: 50)
                     
                     //시간 1분씩 추가
                     Button {
@@ -120,8 +131,9 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "plus.square.fill")
                     }
+                    .font(.system(size: 20))
                     .buttonStyle(.borderless)
-                    .offset(x: 50, y: -70)
+                    .offset(x: 23, y: -7)
                     
                     //시간 1분씩 차감
                     Button {
@@ -132,12 +144,13 @@ struct ContentView: View {
                         Image(systemName: "minus.square.fill")
                     }
                     .buttonStyle(.borderless)
-                    .offset(x: 50, y: 9)
+                    .offset(x: -20, y: -36)
+                    .font(.system(size: 20))
                 }
             }
             
         }
-        .frame(width: 100, height: 100)
+        .frame(width: 120, height: 120)
         .padding()
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         .onReceive(timer) { _ in
