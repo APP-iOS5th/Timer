@@ -7,6 +7,17 @@
 import SwiftUI
 import AVFoundation
 
+extension Color {
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet(charactersIn: "#"))
+        let rgbValue = UInt32(hex, radix: 16)
+        let r = Double((rgbValue! & 0xFF0000) >> 16) / 255
+        let g = Double((rgbValue! & 0x00FF00) >> 8) / 255
+        let b = Double(rgbValue! & 0x0000FF) / 255
+        self.init(red: r, green: g, blue: b)
+    }
+}
+
 
 struct AlwaysOnTopView: NSViewRepresentable {
     let window: NSWindow
@@ -50,14 +61,21 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
+                .font(.system(size: 40, weight: .regular))
+                .foregroundColor(.black)
+                .frame(maxWidth:.infinity, alignment: .trailing)
+            
             ZStack {
                 Circle()
-                    .stroke(Color.gray.opacity(0.2), lineWidth: 10)
+                    .fill(Color.black)
+                    .frame(width: 100, height: 100)
                 
                 Circle()
                     .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
+                   
                 
                 VStack {
                     Button {
@@ -95,7 +113,10 @@ struct ContentView: View {
             }
             
         }
-        .frame(width: 100, height: 100)
+        
+        .frame(width: 198, height: 242)
+        .background(Color(hex: "#EDEFF3"))
+        .ignoresSafeArea()
         .padding()
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         .onReceive(timer) { _ in
