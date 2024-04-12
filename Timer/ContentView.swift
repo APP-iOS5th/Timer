@@ -60,6 +60,7 @@ struct ContentView: View {
                     Text("🦍").font(.system(size: 13)).tag("🦍")
                     Text("🐈").font(.system(size: 13)).tag("🐈")
                     Text("🐕").font(.system(size: 13)).tag("🐕")
+
                 }
                 .frame(width: 160)
             Spacer()
@@ -134,7 +135,7 @@ struct ContentView: View {
                 isRunning = false
             }
         }.alert(isPresented: $showAlert, content: {
-            Alert(title: Text("!!!"), message: Text("10초남았습니다!!!!"),
+            Alert(title: Text("시간이 없어요!"), message: Text("10초남았습니다!!!!"),
                   dismissButton: .default(Text("OK"))
             )
         })
