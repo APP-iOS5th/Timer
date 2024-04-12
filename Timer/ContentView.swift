@@ -26,7 +26,7 @@ class SoundManager {
 
 struct ContentView: View {
     @State private var isRunning = false
-    @State private var timeRemaining = 10
+    @State private var timeRemaining = 0
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -36,12 +36,37 @@ struct ContentView: View {
                 Circle()
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                 Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining) / (5 * 60))
+                    .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
                 VStack {
-                    Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                        .font(.system(size: 20, weight: .bold))
+                    Button {
+                        switch timeRemaining {
+                        case 0..<180:
+                            timeRemaining = 180
+                        case 180..<300:
+                            timeRemaining = 300
+                        case 300..<420:
+                            timeRemaining = 420
+                        case 300..<600:
+                            timeRemaining = 600
+                        case 600..<900:
+                            timeRemaining = 900
+                        case 900..<1200:
+                            timeRemaining = 1200
+                        case 1200..<1500:
+                            timeRemaining = 1500
+                        case 1500..<1800:
+                            timeRemaining = 1800
+                        default:
+                            timeRemaining = 0
+                        }
+                        
+                    } label: {
+                        Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
+                            .font(.system(size: 20, weight: .bold))
+                    }
+                    .buttonStyle(PlainButtonStyle())
                     Button {
                         isRunning.toggle()
                     } label: {
