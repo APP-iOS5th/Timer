@@ -73,7 +73,7 @@ struct ContentView: View {
                 RoundedRectangle(cornerRadius: 8)
                     .foregroundColor(getBarColor())
                     .frame(width: (88.5 * CGFloat(timeRemaining) / CGFloat(totalTime)), height: 40)
-                    .offset(x: 9.0, y: -1.5)
+                    .offset(x: 8.5, y: -1.5)
                 
                 Text("\(String(format: "%02d", timeRemaining / 60)):\(String(format: "%02d", timeRemaining % 60))")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -85,7 +85,7 @@ struct ContentView: View {
             }
             
             HStack {
-                TextField("Minutes", value: $minutesInput, formatter: NumberFormatter())
+                TextField("M", value: $minutesInput, formatter: NumberFormatter())
                     .frame(width: 30, alignment: .center)
                     .textFieldStyle(SquareBorderTextFieldStyle())
                     .font(.title2)
@@ -96,7 +96,7 @@ struct ContentView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                 
-                TextField("Seconds", value: $secondsInput, formatter: NumberFormatter())
+                TextField("S", value: $secondsInput, formatter: NumberFormatter())
                     .frame(width: 30, alignment: .center)
                     .textFieldStyle(SquareBorderTextFieldStyle())
                     .font(.title2)
@@ -114,7 +114,7 @@ struct ContentView: View {
             }
             .buttonStyle(PlainButtonStyle())
             .font(.system(size: 30))
-            .disabled(Int(minutesInput) == 0 && Int(secondsInput) == 0)
+            .disabled(Int(minutesInput) < 0 || Int(secondsInput) <= 0)
             
         }
         .padding()
