@@ -51,10 +51,11 @@ struct ContentView: View {
     @State private var animeIconPositionX: CGFloat = -20
     @State private var animeIconName: String = "airplane"
     
+    
     // Timer Config
     private let MAX_TIME = 11 * 60
     private let MIN_TIME = 0
-    private let TIMER_VALUE = 10
+    private var TIMER_VALUE = 10
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -89,10 +90,9 @@ struct ContentView: View {
                 
             }
             
-            animeIconPositionX += 2
+            animeIconPositionX += 5
             
             if animeIconPositionX >= 20 {
-                animeIconName = "airplane"
                 animeIconPositionX = -20
             }
         } else if isRunning {
@@ -171,6 +171,7 @@ struct ContentView: View {
             
         }
         .padding()
+        .frame(width: 150, height: 90)
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         .onReceive(timer) { _ in
             timerAction()
