@@ -63,7 +63,7 @@ struct DifficultyButton: View {
     var body: some View {
         Button(action: action) {
             Text(label)
-                .frame(width: 100, height: 30, alignment: .center)
+                .frame(width: 60, height: 30, alignment: .center)
                 .foregroundColor(.white)
                 .background(isSelected ? Color.red : Color.blue)
                 .cornerRadius(25)
