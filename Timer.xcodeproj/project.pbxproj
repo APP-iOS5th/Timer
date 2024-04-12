@@ -107,6 +107,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		83800BEC2BC9085A004A1830 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				83D6F2BE2BC8FD01004D2D48 /* RemainingTimeLabel.swift */,
+				83D6F2BB2BC8FBBF004D2D48 /* InitialTimeLabel.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
 		83D6F2B82BC8FB83004D2D48 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,9 +129,8 @@
 		83D6F2BD2BC8FCE2004D2D48 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				83D6F2BB2BC8FBBF004D2D48 /* InitialTimeLabel.swift */,
+				83800BEC2BC9085A004A1830 /* Label */,
 				83D6F2B92BC8FB92004D2D48 /* TimerTickView.swift */,
-				83D6F2BE2BC8FD01004D2D48 /* RemainingTimeLabel.swift */,
 				8315A5BF2BC8FDC500E2CEBB /* TimerCell.swift */,
 			);
 			path = Component;
