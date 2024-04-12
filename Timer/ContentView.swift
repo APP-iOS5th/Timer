@@ -49,7 +49,7 @@ struct ContentView: View {
             Spacer()
             
         }
-        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: isPlay ? true : false))
+        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: isPlay))
         .onReceive(time) { _ in
             if seconds > 0 && isPlay {
                 seconds -= 1
