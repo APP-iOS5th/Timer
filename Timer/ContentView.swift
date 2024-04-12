@@ -34,12 +34,40 @@ struct ContentView: View {
         VStack {
             ZStack{
                 Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining)/(5 * 60)) //특정 부분만 남기고 나머지 부분 절단
+                    .trim(from: 0, to: CGFloat(timeRemaining)/(30 * 60)) //특정 부분만 남기고 나머지 부분 절단
                     .stroke(Color.gray.opacity(0.2), lineWidth: 20)
                     .rotationEffect(.degrees(-90))
                 VStack {
-                    Text("\(timeRemaining/60) : \(String(format: "%02d", timeRemaining % 60))")
-                        .font(.system(size:20, weight: .regular))
+                    Button{
+                        switch timeRemaining {
+                        case 0..<180:
+                            timeRemaining = 180
+                        case 180..<360:
+                            timeRemaining = 360
+                        case 360..<420:
+                            timeRemaining = 420
+                        case 420..<600:
+                            timeRemaining = 600
+                        case 600..<900:
+                            timeRemaining = 900
+                        case 900..<1200:
+                            timeRemaining = 1200
+                        case 1200..<1500:
+                            timeRemaining = 1500
+                        case 1500..<1800:
+                            timeRemaining = 1800
+                        case 1800..<2100:
+                            timeRemaining = 2100
+                        default:
+                            timeRemaining = 0
+                        }
+                    } label: {
+                        Text("\(timeRemaining/60) : \(String(format: "%02d", timeRemaining % 60))")
+                            .font(.system(size:20, weight: .regular))
+
+                    }
+                    .buttonStyle(.borderless)
+                    
                     Button {
                         isRunning.toggle()
                     } label: {
