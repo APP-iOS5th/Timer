@@ -9,6 +9,8 @@ import SwiftUI
 import AppKit
 import AVFoundation
 
+
+
 class SoundManager {
     static let instance = SoundManager()
     var player: AVAudioPlayer?
@@ -28,7 +30,7 @@ class SoundManager {
 struct ContentView: View {
     
     @State private var isRunning = false // 타이머를 클릭해서 작동중인지 판단하는 변수
-    @State private var timeRemaining = 1
+    @State private var timeRemaining = 10
     
     //타이머 함수 1초마다 이벤트를 발생시킨다
     let timer = Timer.publish(every: 1, on: .main , in: .common).autoconnect()
@@ -44,10 +46,32 @@ struct ContentView: View {
                     .trim(from: 0, to: CGFloat(timeRemaining) / (5 * 60))
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90)) // -90도 돌려준다
-                
+                 
                 VStack{
-                    Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                        .font(.system(size: 20, weight: .bold))
+                    Button {
+                        switch timeRemaining {
+                                                 case 0..<180:
+                                                     timeRemaining = 180
+                                                 case 180..<300:
+                                                     timeRemaining = 300
+                                                 case 300..<420:
+                                                     timeRemaining = 420
+                                                 case 300..<600:
+                                                     timeRemaining = 600
+                                                 case 600..<900:
+                                                     timeRemaining = 900
+                                                 case 900..<1200:
+                                                     timeRemaining = 1200
+                                                 case 1200..<1500:
+                                                     timeRemaining = 1500
+                                                 case 1500..<1800:
+                                                     timeRemaining = 1800
+                                                 default:
+                                                     timeRemaining = 0
+                                                 }
+                    }label:{ Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
+                    .font(.system(size: 20, weight: .bold))
+                }.buttonStyle(PlainButtonStyle())
                     Button {
                         isRunning.toggle()
                     } label: {
