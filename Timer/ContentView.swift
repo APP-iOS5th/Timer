@@ -38,7 +38,8 @@ class SoundManager {
 
 struct ContentView: View {
     @State private var isRunning = false
-    @State private var userInput = "" // 입력
+    @State private var minutesInput = ""
+    @State private var secondsInput = ""
     @State private var timeRemaining = 0
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -50,39 +51,48 @@ struct ContentView: View {
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                 
                 Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat((Int(userInput) ?? 0) * 60))
+                    .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat((Int(minutesInput) ?? 0) * 60 + (Int(secondsInput) ?? 0)))
                     .stroke(Color.indigo.opacity(50), lineWidth: 10)
                     .rotationEffect(.degrees(-90))
                 
+                Button {
+                    timeRemaining = 0
+                    isRunning = false
+                    minutesInput = ""
+                    secondsInput = ""
+                } label: {
+                    Image(systemName: "arrow.clockwise")
+                }
+                .buttonStyle(PlainButtonStyle())
+                .font(.system(size: 8))
+                .offset(CGSize(width: 42, height: -28))
                 
                 VStack {
                     Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
                         .font(.system(size: 30, weight: .bold))
                     
-                        Button {
-                            timeRemaining = 0
-                            isRunning = false
-                            userInput = ""
-                        } label: {
-                            Image(systemName: "arrow.clockwise")
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .font(.system(size: 8))
-                        .offset(CGSize(width: 40, height: -15))
-                    
-                    TextField("분을 입력", text: $userInput) // 입력
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding([.trailing, .leading])
-                        .frame(width: 101)
+                    HStack {
+                        TextField("M", text: $minutesInput)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.leading)
+                            .frame(width: 50)
+                        
+                        Text(":")
+                        
+                        TextField("S", text: $secondsInput)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.trailing)
+                            .frame(width: 50)
+                    }
                     
                     Button {
                         if isRunning {
                             isRunning.toggle()
                         } else {
-                            if let inputTime = Int(userInput) {
-                                timeRemaining = inputTime * 60
-                                isRunning.toggle()
-                            }
+                            let minutes = Int(minutesInput) ?? 0
+                            let seconds = Int(secondsInput) ?? 0
+                            timeRemaining = minutes * 60 + seconds
+                            isRunning.toggle()
                         }
                     } label: {
                         Image(systemName: isRunning ? "pause.fill" : "play.fill")
@@ -106,6 +116,7 @@ struct ContentView: View {
         }
     }
 }
+
 
 
 
