@@ -47,7 +47,6 @@ class SoundManager {
 struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
-    @State private var totalTime = 0
     @State private var minuteInput = ""
     @State private var secondInput = ""
     
@@ -63,7 +62,7 @@ struct ContentView: View {
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                 
                 Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat(totalTime))
+                    .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat((Int(minuteInput) ?? 0) * 60 + (Int(secondInput) ?? 0)))
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
                 
@@ -73,7 +72,7 @@ struct ContentView: View {
                             .offset(x: positionX)
                             .onChange(of: isRunning) { oldValue, newValue in
                                 if newValue {
-                                    withAnimation(Animation.linear(duration: 4).repeatForever()) {
+                                    withAnimation(Animation.linear(duration: 5).repeatForever()) {
                                         positionX = CGFloat(geometry.frame(in: .global).origin.x) * (-1)
                                         positionX += geometry.size.width
                                     }
@@ -127,7 +126,6 @@ struct ContentView: View {
                     Button {
                         if Int(minuteInput) != nil && Int(secondInput) != nil {
                             isRunning.toggle()
-                            totalTime = (Int(minuteInput) ?? 0) * 60 + (Int(secondInput) ?? 0)
                         }
                     } label: {
                         Image(systemName: isRunning ? "pause" : "play.fill")
