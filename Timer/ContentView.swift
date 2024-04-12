@@ -65,6 +65,22 @@ struct ContentView: View {
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
                 
+                GeometryReader { geometry in
+                    VStack {
+                        Image(systemName: "hare.fill")
+                            .offset(x: positionX)
+                            .onChange(of: isRunning) { oldValue, newValue in
+                                if newValue {
+                                    withAnimation(Animation.linear(duration: 4).repeatForever()) {
+                                        positionX = CGFloat(geometry.frame(in: .global).origin.x) * (-1)
+                                        positionX += geometry.size.width
+                                    }
+                                } 
+
+                            }
+                    }
+                }
+                
                 VStack {
                     HStack {
                         TextField("00", text: $minuteInput)
