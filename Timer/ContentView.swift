@@ -2,6 +2,9 @@ import SwiftUI
 import AVFoundation
 
 
+
+
+
 struct AlwaysOnTopView: NSViewRepresentable {
     let window: NSWindow
     let isAlwaysOnTop: Bool
@@ -62,7 +65,7 @@ struct ContentView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .foregroundStyle(.white)
-                        .offset(x: torToisePosition , y:0)
+                        .position(x: torToisePosition , y:0)
                 }
             }
             .frame(width: 250, height: 20)
@@ -106,7 +109,8 @@ struct ContentView: View {
             HStack {
                 ForEach(timeList, id: \.self) { seletedTime in
                     Button {
-                        PlusTime(time: (60 * seletedTime))
+                        isRunning = false
+                        timeRemaining += (60 * seletedTime)
                     } label: {
                         Text("+\(seletedTime)분")
                     }
@@ -124,9 +128,10 @@ struct ContentView: View {
                 if timeRemaining <= 10 {
                     NSSound.beep()
                 }
-                
                 // 거북이 위치 업데이트
                 torToisePosition += 10
+                
+                // 거북이 위치 다시 초기화
                 if torToisePosition >= maxTorToisePosition {
                     torToisePosition = -20
                 }
@@ -134,11 +139,6 @@ struct ContentView: View {
                 isRunning = false
             }
         }
-    }
-    
-    func PlusTime (time: Int) {
-        isRunning = false
-        timeRemaining += time
     }
 }
 
