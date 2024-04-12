@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  TeacherView.swift
 //  Timer
 //
 //  Created by uunwon on 4/12/24.
@@ -9,7 +9,7 @@ import SwiftUI
 import AVFoundation
 
 // ✨ 항상 위에 떠있게 하는 struct
-struct AlwaysOnTopView: NSViewRepresentable {
+struct AlwaysOnTopView1: NSViewRepresentable {
     let window: NSWindow
     let isAlwaysOnTop: Bool
     
@@ -28,8 +28,8 @@ struct AlwaysOnTopView: NSViewRepresentable {
 }
 
 // ✨ 소리 넣기
-class SoundManager {
-    static let instance = SoundManager()
+class SoundManager1 {
+    static let instance = SoundManager1()
     var player: AVAudioPlayer?
     
     func playSound() {
@@ -45,7 +45,7 @@ class SoundManager {
 }
 
 @available(iOS 15.0, *)
-struct ContentView: View {
+struct TeacherView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
     
@@ -116,5 +116,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    TeacherView()
 }
