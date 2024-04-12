@@ -9,7 +9,23 @@ import SwiftUI
 import AppKit
 import AVFoundation
 
-
+struct AlwaysOnTopView: NSViewRepresentable {
+    let window: NSWindow
+    let isAlwaysOnTop: Bool
+    
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        return view
+    }
+    
+    func updateNSView(_ nsView: NSView, context: Context) {
+        if isAlwaysOnTop {
+            window.level = .floating
+        } else {
+            window.level = .normal
+        }
+    }
+}
 
 class SoundManager {
     static let instance = SoundManager()
@@ -82,6 +98,7 @@ struct ContentView: View {
         }
         .frame(width: 100, height: 100)
         .padding()
+        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         //view에서 지정된 publisher가 emit한 데이터를 감지할 때 수행할 작업을 추가
         .onReceive(timer, perform: { _ in
             if isRunning && timeRemaining > 0 {
