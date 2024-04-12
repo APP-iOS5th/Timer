@@ -77,6 +77,7 @@ struct ContentView: View {
                 .stroke(.red.opacity(0.7)
                         ,style: StrokeStyle(lineWidth: 10))
                 .rotationEffect(.init(degrees: -90))
+                .animation(.bouncy, value: seconds)
             
             circleInnerItemView()
         }
