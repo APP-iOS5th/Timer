@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04185E582BC90A7B0085565B /* levelup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04185E562BC90A7B0085565B /* levelup.mp3 */; };
+		04185E592BC90A7B0085565B /* notify.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04185E572BC90A7B0085565B /* notify.mp3 */; };
 		37FC17AE2BC8BFA9006AC8A9 /* TimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC17AD2BC8BFA9006AC8A9 /* TimerApp.swift */; };
 		37FC17B02BC8BFA9006AC8A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC17AF2BC8BFA9006AC8A9 /* ContentView.swift */; };
 		37FC17B22BC8BFAB006AC8A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FC17B12BC8BFAB006AC8A9 /* Assets.xcassets */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04185E562BC90A7B0085565B /* levelup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = levelup.mp3; sourceTree = "<group>"; };
+		04185E572BC90A7B0085565B /* notify.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = notify.mp3; sourceTree = "<group>"; };
 		37FC17AA2BC8BFA9006AC8A9 /* Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FC17AD2BC8BFA9006AC8A9 /* TimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerApp.swift; sourceTree = "<group>"; };
 		37FC17AF2BC8BFA9006AC8A9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 				37FC17B12BC8BFAB006AC8A9 /* Assets.xcassets */,
 				37FC17B62BC8BFAB006AC8A9 /* Timer.entitlements */,
 				37FC17BC2BC8C8D7006AC8A9 /* Beep.mov */,
+				04185E562BC90A7B0085565B /* levelup.mp3 */,
+				04185E572BC90A7B0085565B /* notify.mp3 */,
 				37FC17B32BC8BFAB006AC8A9 /* Preview Content */,
 			);
 			path = Timer;
@@ -131,7 +137,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FC17B52BC8BFAB006AC8A9 /* Preview Assets.xcassets in Resources */,
+				04185E592BC90A7B0085565B /* notify.mp3 in Resources */,
 				37FC17BD2BC8C8D7006AC8A9 /* Beep.mov in Resources */,
+				04185E582BC90A7B0085565B /* levelup.mp3 in Resources */,
 				37FC17B22BC8BFAB006AC8A9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
