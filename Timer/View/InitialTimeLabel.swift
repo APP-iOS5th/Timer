@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct InitialTimeLabel: View {
+    private let time: Int
+    
+    init(time: Int) {
+        self.time = time
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if time % 60 == 0 {
+            Text("\(String(format: "%02d", time / 60)) minutes")
+                .font(.title)
+                .foregroundStyle(.gray)
+        } else {
+            Text("\(String(format: "%02d", time / 60)):\(String(format: "%02d", time % 60))")
+                .font(.title)
+                .foregroundStyle(.gray)
+        }
     }
 }
 
 #Preview {
-    InitialTimeLabel()
+    InitialTimeLabel(time: 50)
 }
