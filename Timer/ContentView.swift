@@ -15,8 +15,6 @@ struct ContentView: View {
     
     @State private var alarmAry: [alarmModel] = []
     
-    @State var isClicked: Bool = false
-    
     // every 마다 이벤트를 발생시킴
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
