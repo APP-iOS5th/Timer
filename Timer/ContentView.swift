@@ -63,9 +63,27 @@ struct ContentView: View {
                     .rotationEffect(.degrees(-90))
                 
                 VStack {
+                    //강사님이 많이 사용하시는 3, 5, 7, 10분
+                    Button {
+                    switch timeRemaining {
+                    case 0..<180:
+                        timeRemaining = 180
+                    case 180..<300:
+                        timeRemaining = 300
+                    case 300..<420:
+                        timeRemaining = 420
+                    case 420..<600:
+                        timeRemaining = 600
+                    default:
+                        timeRemaining = 0
+                    }
+                        
+                    } label: {
                         Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
                             .font(.system(size: 20, weight: .bold))
-                            .offset(x:0, y: 25)
+                    }
+                    .buttonStyle(.borderless)
+                    .offset(x:0, y: 22)
                     Button {
                         isRunning.toggle()
                     } label: {
@@ -73,6 +91,7 @@ struct ContentView: View {
                     }
                     .offset(x: 0, y:25)
                     
+                    //시간 1분씩 추가
                     Button {
                         switch timeRemaining {
                         case 0..<60:
@@ -104,39 +123,19 @@ struct ContentView: View {
                     .buttonStyle(.borderless)
                     .offset(x: 50, y: -70)
                     
+                    //시간 1분씩 차감
                     Button {
-                        switch timeRemaining {
-                        case 540..<600:
-                            timeRemaining = 540
-                        case 480..<540:
-                            timeRemaining = 480
-                        case 420..<480:
-                            timeRemaining = 420
-                        case 360..<420:
-                            timeRemaining = 360
-                        case 300..<360:
-                            timeRemaining = 300
-                        case 240..<300:
-                            timeRemaining = 240
-                        case 180..<240:
-                            timeRemaining = 180
-                        case 120..<180:
-                            timeRemaining = 120
-                        case 60..<120:
-                            timeRemaining = 60
-                        case 0..<60:
-                            timeRemaining = 0
-                        default:
-                            timeRemaining = 0
+                        if (timeRemaining > 0) {
+                            timeRemaining = timeRemaining - 60
                         }
                     } label: {
                         Image(systemName: "minus.square.fill")
                     }
                     .buttonStyle(.borderless)
-                    .offset(x: 50, y: 6)
+                    .offset(x: 50, y: 9)
                 }
             }
-                
+            
         }
         .frame(width: 100, height: 100)
         .padding()
