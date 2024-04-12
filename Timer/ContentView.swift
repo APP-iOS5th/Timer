@@ -46,18 +46,16 @@ struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
     @State private var stateSymbol = "" // 선택한 시간에 따라 출력되는 심볼
-    //@State private var alertColor
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        
         VStack {
             
             ZStack {
 
                 Circle()
-                    .stroke(Color.gray.opacity(0.2), lineWidth: 10) //기본 틀
+                    .stroke(Color.white.opacity(0.2), lineWidth: 10) //기본 틀
                 
                 Circle()
                     .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
@@ -111,7 +109,7 @@ struct ContentView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 20, height: 20)
                         .padding(6)
-                        .scaleEffect((timeRemaining <= 10 && timeRemaining % 2 == 0) ? 1.75 : 1) //10초 이하일 때 크기 변경
+                        .scaleEffect((timeRemaining <= 10 && timeRemaining % 2 == 1) ? 1.75 : 1) //10초 이하일 때 크기 변경
                         .animation(.default, value: timeRemaining)
                     
                     Button {
@@ -127,6 +125,7 @@ struct ContentView: View {
         .frame(width: 100, height: 100)
         .padding()
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
+        .background((timeRemaining <= 10 && timeRemaining % 2 == 1) ? Color.red : Color.clear) //10초 이하가 되면 1초에 한 번씩 색 바꿔서 어그로
         .onReceive(timer) { _ in //타이머가 실행되면 뒤의 코드를 실행
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
