@@ -8,13 +8,7 @@
 import SwiftUI
 
 struct TimerListView: View {
-    @State private var timerInfo: [TimerInfo] = [
-        .init(time: 30),
-        .init(time: 180),
-        .init(time: 10),
-        .init(time: 50),
-        .init(time: 120),
-    ]
+    @State private var viewModel = TimerListViewModel()
     
     private var columns: [GridItem] = [
         .init(.flexible()),
@@ -29,7 +23,7 @@ struct TimerListView: View {
                     .bold()
                     .foregroundStyle(.white)
                 LazyVGrid(columns: columns) {
-                    ForEach(timerInfo) { timer in
+                    ForEach(viewModel.timerInfo) { timer in
                         NavigationLink {
                             TimerView(timer)
                         } label: {
