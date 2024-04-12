@@ -65,7 +65,7 @@ struct ContentView: View {
                 Button(){
                     isRunning.toggle()
                     timeRemaining = startTime
-                    widthValue = 0
+                    widthValue = 80
                 } label: {
                     if isRunning {
                         Image(systemName: "return")
@@ -154,7 +154,7 @@ struct ContentView: View {
                 }
             } else if isRunning {
                 isRunning = false
-                widthValue = 0
+                widthValue = 80
                 timeRemaining = startTime
                 
                 
