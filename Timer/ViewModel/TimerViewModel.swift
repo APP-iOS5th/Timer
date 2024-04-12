@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 @Observable
-class TimerViewModel {
+final class TimerViewModel {
     private let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
     private var cancellable: AnyCancellable?
     
