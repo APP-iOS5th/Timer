@@ -2,21 +2,22 @@
 //  ContentView.swift
 //  Timer
 //
-//  Created by 황규상 on 4/12/24.
+//  Created by Jungman Bae on 4/12/24.
 //
 
 import SwiftUI
 import AVFoundation
 
+
 struct AlwaysOnTopView: NSViewRepresentable {
     let window: NSWindow
     let isAlwaysOnTop: Bool
-
+    
     func makeNSView(context: Context) -> NSView {
         let view = NSView()
         return view
     }
-
+    
     func updateNSView(_ nsView: NSView, context: Context) {
         if isAlwaysOnTop {
             window.level = .floating
@@ -26,13 +27,14 @@ struct AlwaysOnTopView: NSViewRepresentable {
     }
 }
 
+
 class SoundManager {
     static let instance = SoundManager()
     var player: AVAudioPlayer?
-
+    
     func playSound() {
         guard let url = Bundle.main.url(forResource: "Beep", withExtension: "mov") else { return }
-
+        
         do {
             player = try AVAudioPlayer(contentsOf: url)
             player?.play()
@@ -42,10 +44,11 @@ class SoundManager {
     }
 }
 
+
 struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
-
+    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -53,10 +56,12 @@ struct ContentView: View {
             ZStack {
                 Circle()
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10)
+                
                 Circle()
                     .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
+                
                 VStack {
                     Button {
                         switch timeRemaining {
@@ -79,7 +84,7 @@ struct ContentView: View {
                         default:
                             timeRemaining = 0
                         }
-                        
+
                     } label: {
                         Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
                             .font(.system(size: 20, weight: .bold))
@@ -92,6 +97,7 @@ struct ContentView: View {
                     }
                 }
             }
+                
         }
         .frame(width: 100, height: 100)
         .padding()
