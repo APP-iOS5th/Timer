@@ -8,7 +8,10 @@
 import SwiftUI
 import AVFoundation
 
-
+extension Color {
+    static let turtGreen = Color("turtleGreen")
+    static let grBrown = Color("myBrown")
+}
 struct AlwaysOnTopView: NSViewRepresentable {
     let window: NSWindow
     let isAlwaysOnTop: Bool
@@ -44,41 +47,48 @@ class SoundManager {
     }
 }
 
-let endSound = SoundManager.instance
+let endSound = SoundManager.instance // 이렇게 하나 만들어줘야 사용 가능함!
 
 struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
     @State private var initialTime = 0
+    @State private var turtleProgress: CGFloat = 0.0
 
-    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
+
     var body: some View {
         VStack {
             ZStack {
                 Circle()
                     .stroke(Color.gray.opacity(0.2), lineWidth: 10)
-                
+
                 Circle()
                     .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat(initialTime))
                     .stroke(Color.blue, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
-                
-                
-                
+
+                Image(systemName: "tortoise.fill")
+                    .foregroundColor(.turtGreen)
+                    .offset(x: -90 + (180 * turtleProgress), y: 90) // 거북이 위치, 180은 직선의 길이
+
+                Rectangle()
+                    .frame(width: 200, height: 5, alignment: .center)
+                    .offset(y: 100)
+                    .foregroundColor(.grBrown)
+
                 VStack {
                     Button {
                         switch timeRemaining {
                         case 0..<60:
                             timeRemaining = 60
                         case 60..<180:
-                            timeRemaining = 300
+                            timeRemaining = 180
                         case 180..<300:
                             timeRemaining = 300
                         case 300..<420:
                             timeRemaining = 420
-                        case 300..<600:
+                        case 420..<600:
                             timeRemaining = 600
                         case 600..<900:
                             timeRemaining = 900
@@ -92,6 +102,7 @@ struct ContentView: View {
                             timeRemaining = 0
                         }
                         initialTime = timeRemaining
+                        turtleProgress = 0.0
 
                     } label: {
                         Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
@@ -112,6 +123,7 @@ struct ContentView: View {
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
+                turtleProgress = CGFloat(1 - (Double(timeRemaining) / Double(initialTime)))
                 if timeRemaining <= 10 {
                     NSSound.beep()
                 }
@@ -119,8 +131,9 @@ struct ContentView: View {
                 isRunning = false
                 endSound.playSound()
             }
-        }
+        }.frame(minWidth: 300, minHeight: 300) // 오 여기에 설정하니까 창 크기 조절됐다,,
     }
+    
 }
 
 #Preview {
