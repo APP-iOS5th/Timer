@@ -92,6 +92,7 @@ struct ContentView: View {
                 isRunning = false
             }
         }
+        .padding()
     }
 }
 
