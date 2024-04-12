@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct RemainingTimeLabel: View {
+    private let remainingTime: Int
+    
+    init(remainingTime: Int) {
+        self.remainingTime = remainingTime
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("\(String(format: "%02d", remainingTime / 60)):\(String(format: "%02d", remainingTime % 60))")
+            .font(.system(size: 40, weight: .bold))
+            .foregroundStyle(.gray)
     }
 }
 
 #Preview {
-    RemainingTimeLabel()
+    RemainingTimeLabel(remainingTime: 110)
 }
