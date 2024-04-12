@@ -53,129 +53,123 @@ struct ContentView: View {
     @State private var flag = false
     @State private var myColor = Color.gray.opacity(0.2)
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let soundManager = SoundManager.instance
     
     var body: some View {
         VStack {
-                ZStack {
-                    VStack(alignment: .leading) {
-                        //버튼 시간 조정하기
-                        Button(action: {
-                            flag.toggle()
-                        }, label: {
-                            Text(flag ? "완 료" : "버튼 수정")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .frame(width: 45)
-                        })
-                        .padding(5)
-                        .foregroundColor(.blue)
-                        .background(Color.white)
-                        .cornerRadius(10.0)
-                        
-                        // 색상 바꾸기 기능 미완성
-                        ColorPicker(selection: $myColor, label: {})
-                        .foregroundColor(.blue)
-                        .background(Color.white)
-                        .cornerRadius(10.0)
-                    }.offset(CGSize(width: -95.0, height: -55.0))
-                    
-                    
-                    // 가운데 타이머 원
-                    Circle()
-                        .stroke(Color.gray.opacity(0.2), lineWidth: 10)
-                        .frame(width: 100, height: 100)
-                    
-                    Circle()
-                        .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat(totalTime))
-                        .stroke(Color.blue, lineWidth: 10)
-                        .rotationEffect(.degrees(-90))
-                        .frame(width: 100, height: 100)
-                    
-                    Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                        .font(.system(size: 20, weight: .bold))
-                    // 거북이
-                    VStack {
-                        Image(systemName: "tortoise.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 20, height: 20)
-                            .scaleEffect(x: -1, y: 1)
-                            .offset(CGSize(width: 00.0, height: -10.0))
-                        Spacer()
-                    }
+            ZStack {
+                //버튼 시간 조정하기
+                Button(action: {
+                    flag.toggle()
+                }, label: {
+                    Text(flag ? "완 료" : "버튼 수정")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .frame(width: 45)
+                })
+                .padding(5)
+                .foregroundColor(.blue)
+                .background(Color.white)
+                .cornerRadius(10.0)
+                .offset(CGSize(width: -95.0, height: -65.0))
+                
+                
+                // 가운데 타이머 원
+                Circle()
+                    .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                     .frame(width: 100, height: 100)
-                    .rotationEffect(.degrees(totalTime != 0 ? Double(timeRemaining) / Double(totalTime) * 360 : 0.0))
-
-                    // 시간 추가, 감소 버튼
-                    VStack(spacing: 10) {
-                        Button {
-                            timeRemaining += addTime1 * 60
-                            totalTime += addTime1 * 60
-                        } label: {
-                            VStack{
-                                Image(systemName: "timer.square")
-                                    .font(.title)
-                                if flag {
-                                    Stepper(value: $addTime1, in: 1...10) {
-                                        Text("+\(addTime1)m")
-                                            .font(.subheadline)
-                                            .fontWeight(.bold)
-                                    }
-                                }
-                                else {
+                
+                Circle()
+                    .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat(totalTime))
+                    .stroke(Color.blue, lineWidth: 10)
+                    .rotationEffect(.degrees(-90))
+                    .frame(width: 100, height: 100)
+                
+                Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
+                    .font(.system(size: 20, weight: .bold))
+                // 거북이
+                VStack {
+                    Image(systemName: "tortoise.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 20, height: 20)
+                        .scaleEffect(x: -1, y: 1)
+                        .offset(CGSize(width: 00.0, height: -10.0))
+                    Spacer()
+                }
+                .frame(width: 100, height: 100)
+                .rotationEffect(.degrees(totalTime != 0 ? Double(timeRemaining) / Double(totalTime) * 360 : 0.0))
+                
+                // 시간 추가, 감소 버튼
+                VStack(spacing: 10) {
+                    Button {
+                        timeRemaining += addTime1 * 60
+                        totalTime += addTime1 * 60
+                    } label: {
+                        VStack{
+                            Image(systemName: "timer.square")
+                                .font(.title)
+                            if flag {
+                                Stepper(value: $addTime1, in: 1...10) {
                                     Text("+\(addTime1)m")
                                         .font(.subheadline)
                                         .fontWeight(.bold)
                                 }
                             }
+                            else {
+                                Text("+\(addTime1)m")
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }
                         }
-                        Button {
-                            timeRemaining += addTime2 * 60
-                            totalTime += addTime2 * 60
-                        } label: {
-                            VStack{
-                                Image(systemName: "timer.square")
-                                    .font(.title)
-                                if flag {
-                                    Stepper(value: $addTime2, in: 5...60, step: 5) {
-                                        Text("+\(addTime2)m")
-                                            .font(.subheadline)
-                                            .fontWeight(.bold)
-                                    }
-                                }
-                                else {
+                    }
+                    Button {
+                        timeRemaining += addTime2 * 60
+                        totalTime += addTime2 * 60
+                    } label: {
+                        VStack{
+                            Image(systemName: "timer.square")
+                                .font(.title)
+                            if flag {
+                                Stepper(value: $addTime2, in: 5...60, step: 5) {
                                     Text("+\(addTime2)m")
                                         .font(.subheadline)
                                         .fontWeight(.bold)
                                 }
                             }
-                        }
-                        Button {
-                            if timeRemaining >= reduceTime * 60 {
-                                timeRemaining -= reduceTime * 60
-                                totalTime -= reduceTime * 60
+                            else {
+                                Text("+\(addTime2)m")
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
                             }
-                        } label: {
-                            VStack{
-                                Image(systemName: "timer.square")
-                                    .font(.title)
-                                if flag {
-                                    Stepper(value: $reduceTime, in: 1...60) {
-                                        Text("-\(reduceTime)m")
-                                            .font(.subheadline)
-                                            .fontWeight(.bold)
-                                    }
-                                }
-                                else {
+                        }
+                    }
+                    Button {
+                        if timeRemaining >= reduceTime * 60 {
+                            timeRemaining -= reduceTime * 60
+                            totalTime -= reduceTime * 60
+                        }
+                    } label: {
+                        VStack{
+                            Image(systemName: "timer.square")
+                                .font(.title)
+                            if flag {
+                                Stepper(value: $reduceTime, in: 1...60) {
                                     Text("-\(reduceTime)m")
                                         .font(.subheadline)
                                         .fontWeight(.bold)
                                 }
-                            }.foregroundColor(.red)
-                        }
+                            }
+                            else {
+                                Text("-\(reduceTime)m")
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }
+                        }.foregroundColor(.red)
                     }
-                    .offset(CGSize(width: 100.0, height: 00.0))
                 }
+                .offset(CGSize(width: 100.0, height: 00.0))
+            }
             // 재생, 정지 버튼
             HStack {
                 Button {
@@ -210,6 +204,7 @@ struct ContentView: View {
             } else if isRunning {
                 isRunning = false
                 totalTime = 0
+                soundManager.playSound()
             }
         }
     }
