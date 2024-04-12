@@ -11,6 +11,7 @@
 		7F6ECBE32BC8BFAE007A9A93 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6ECBE22BC8BFAE007A9A93 /* ContentView.swift */; };
 		7F6ECBE52BC8BFB0007A9A93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F6ECBE42BC8BFB0007A9A93 /* Assets.xcassets */; };
 		7F6ECBE82BC8BFB0007A9A93 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F6ECBE72BC8BFB0007A9A93 /* Preview Assets.xcassets */; };
+		7F6ECBF02BC8D225007A9A93 /* ProgressCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6ECBEF2BC8D225007A9A93 /* ProgressCircle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		7F6ECBE42BC8BFB0007A9A93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F6ECBE72BC8BFB0007A9A93 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7F6ECBE92BC8BFB0007A9A93 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
+		7F6ECBEF2BC8D225007A9A93 /* ProgressCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				7F6ECBE02BC8BFAE007A9A93 /* TimerApp.swift */,
 				7F6ECBE22BC8BFAE007A9A93 /* ContentView.swift */,
+				7F6ECBEF2BC8D225007A9A93 /* ProgressCircle.swift */,
 				7F6ECBE42BC8BFB0007A9A93 /* Assets.xcassets */,
 				7F6ECBE92BC8BFB0007A9A93 /* Timer.entitlements */,
 				7F6ECBE62BC8BFB0007A9A93 /* Preview Content */,
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F6ECBE32BC8BFAE007A9A93 /* ContentView.swift in Sources */,
+				7F6ECBF02BC8D225007A9A93 /* ProgressCircle.swift in Sources */,
 				7F6ECBE12BC8BFAE007A9A93 /* TimerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
