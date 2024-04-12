@@ -83,7 +83,6 @@ struct ContentView: View {
                     .foregroundColor(.white)
                     
             }
-            //.padding(10)
             
             HStack {
                 TextField("Minutes", value: $minutesInput, formatter: NumberFormatter())
@@ -103,7 +102,7 @@ struct ContentView: View {
                     .font(.title2)
                     .fontWeight(.bold)
             }
-            //.border(.red)
+            
             Spacer()
             
             Button {
@@ -129,9 +128,6 @@ struct ContentView: View {
                 }
             } else if isPlay {
                 isPlay = false
-            } else {
-//                timeRemaining = 0
-//                totalTime = 0
             }
         }
     }
