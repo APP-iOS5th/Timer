@@ -86,6 +86,13 @@ struct ContentView: View {
             }
             HStack(spacing: 10) {
                 Button(action: {
+                    timeRemaining += 60
+                }, label: {
+                    Text("1")
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
+                })
+                Button(action: {
                     timeRemaining += 120
                 }, label: {
                     Text("2")
@@ -106,13 +113,7 @@ struct ContentView: View {
                         .buttonStyle(.bordered)
                         .controlSize(.large)
                 })
-                Button(action: {
-                    timeRemaining += 420
-                }, label: {
-                    Text("7")
-                        .buttonStyle(.bordered)
-                        .controlSize(.large)
-                })
+
                 Button(action: {
                     timeRemaining += 600
                 }, label: {
