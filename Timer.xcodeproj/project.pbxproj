@@ -22,6 +22,7 @@
 		37FC17B42BC8BFAB006AC8A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37FC17B62BC8BFAB006AC8A9 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
 		37FC17BC2BC8C8D7006AC8A9 /* Beep.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Beep.mov; sourceTree = "<group>"; };
+		CEFF3E4C2BC8E281009DEEF2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +61,7 @@
 				37FC17B62BC8BFAB006AC8A9 /* Timer.entitlements */,
 				37FC17BC2BC8C8D7006AC8A9 /* Beep.mov */,
 				37FC17B32BC8BFAB006AC8A9 /* Preview Content */,
+				CEFF3E4C2BC8E281009DEEF2 /* README.md */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
