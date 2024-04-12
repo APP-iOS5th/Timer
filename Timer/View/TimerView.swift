@@ -9,7 +9,14 @@ import SwiftUI
 import Combine
 
 struct TimerView: View {
-    @State private var viewModel = TimerViewModel(initialTime: 30, remainingTime: 30)
+    @State private var viewModel: TimerViewModel
+    
+    init(_ timerInfo: TimerInfo) {
+        self.viewModel = TimerViewModel(
+            initialTime: timerInfo.time,
+            remainingTime: timerInfo.time
+        )
+    }
     
     var body: some View {
         ZStack {
@@ -27,7 +34,7 @@ struct TimerView: View {
                 } label: {
                     Image(systemName: "x.circle.fill")
                         .foregroundStyle(.gray)
-                        .font(.system(size: 28))
+                        .font(.system(size: 36))
                 }
                 .buttonStyle(.plain)
                 
@@ -45,19 +52,22 @@ struct TimerView: View {
                     )
                     .symbolRenderingMode(.palette)
                     .foregroundStyle(.black, .accent)
-                    .font(.system(size: 28))
+                    .font(.system(size: 36))
                 }
                 .buttonStyle(.plain)
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
         }
-        .frame(width: 200, height: 200)
+        .padding()
+        .frame(maxWidth: 300, maxHeight: 300)
         .background(Color.black)
     }
 }
 
 #Preview {
-    TimerView()
+    TimerView(
+        TimerInfo(time: 120)
+    )
 }
 
 extension CharacterSet {
