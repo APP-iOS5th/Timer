@@ -137,7 +137,7 @@ struct ContentView: View {
                                 Image(systemName: "timer.square")
                                     .font(.title)
                                 if flag {
-                                    Stepper(value: $addTime2, in: 5...60, step: 3) {
+                                    Stepper(value: $addTime2, in: 5...60, step: 5) {
                                         Text("+\(addTime2)m")
                                             .font(.subheadline)
                                             .fontWeight(.bold)
