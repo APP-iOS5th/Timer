@@ -23,6 +23,7 @@ struct TimerListView: View {
                     .bold()
                     .foregroundStyle(.white)
                 LazyVGrid(columns: columns) {
+                    AddTimerButton()
                     ForEach(viewModel.timerInfo) { timer in
                         NavigationLink {
                             TimerView(timer)

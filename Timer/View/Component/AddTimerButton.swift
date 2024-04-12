@@ -9,7 +9,18 @@ import SwiftUI
 
 struct AddTimerButton: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Circle()
+                .rotation(.degrees(-90))
+                .foregroundStyle(.orange)
+                .padding(8)
+            TimerTickView()
+                .colorMultiply(.red)
+            Image(systemName: "plus")
+                .font(.system(size: 48))
+        }
+        .frame(width: 150, height: 150)
+        .background(Color.black)
     }
 }
 
