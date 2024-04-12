@@ -19,6 +19,7 @@ struct AlwaysOnTopView: NSViewRepresentable {
     func updateNSView(_ nsView: NSView, context: Context) {
         if isAlwaysOnTop {
             window.level = .floating
+            window.backgroundColor = .clear
         } else {
             window.level = .normal
         }
@@ -91,7 +92,6 @@ struct ContentView: View {
                 isRunning = false
             }
         }
-        .padding()
     }
 }
 
