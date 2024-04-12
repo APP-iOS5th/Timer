@@ -12,6 +12,7 @@
 		37FC17B22BC8BFAB006AC8A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FC17B12BC8BFAB006AC8A9 /* Assets.xcassets */; };
 		37FC17B52BC8BFAB006AC8A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FC17B42BC8BFAB006AC8A9 /* Preview Assets.xcassets */; };
 		37FC17BD2BC8C8D7006AC8A9 /* Beep.mov in Resources */ = {isa = PBXBuildFile; fileRef = 37FC17BC2BC8C8D7006AC8A9 /* Beep.mov */; };
+		83D770872BC8D0B200949BBB /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D770862BC8D0B200949BBB /* TimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		37FC17B42BC8BFAB006AC8A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37FC17B62BC8BFAB006AC8A9 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
 		37FC17BC2BC8C8D7006AC8A9 /* Beep.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Beep.mov; sourceTree = "<group>"; };
+		83D770862BC8D0B200949BBB /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				37FC17B62BC8BFAB006AC8A9 /* Timer.entitlements */,
 				37FC17BC2BC8C8D7006AC8A9 /* Beep.mov */,
 				37FC17B32BC8BFAB006AC8A9 /* Preview Content */,
+				83D770862BC8D0B200949BBB /* TimerView.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83D770872BC8D0B200949BBB /* TimerView.swift in Sources */,
 				37FC17B02BC8BFA9006AC8A9 /* ContentView.swift in Sources */,
 				37FC17AE2BC8BFA9006AC8A9 /* TimerApp.swift in Sources */,
 			);
@@ -286,6 +290,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.codegrove.Timer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -311,6 +316,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.codegrove.Timer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
