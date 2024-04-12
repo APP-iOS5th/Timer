@@ -212,6 +212,7 @@ struct TimerDisplayView: View {
                         .frame(width: 50, height: 50)
                 }
             }
+            .disabled(timeRemaining > 0 ? false : true)
             .scaleEffect(isRunning && timeRemaining > 0 ? 1.3 : 1)
             .animation(.easeOut, value: isRunning)
             .buttonStyle(PlainButtonStyle())
