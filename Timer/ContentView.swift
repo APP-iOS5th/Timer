@@ -45,58 +45,92 @@ class SoundManager {
 
 struct ContentView: View {
     @State private var isRunning = false
-    @State private var timeRemaining = 5
+    @State private var timeRemaining = 0
+    @State private var totalTime = 0
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
-            ZStack {
-                Circle()
-                    .stroke(Color.gray.opacity(0.2), lineWidth: 10)
-                
-                Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
-                    .stroke(Color.blue, lineWidth: 10)
-                    .rotationEffect(.degrees(-90))
-                
-                VStack {
-                    Button {
-                        switch timeRemaining {
-                        case 0..<180:
-                            timeRemaining = 180
-                        case 180..<300:
-                            timeRemaining = 300
-                        case 300..<420:
-                            timeRemaining = 420
-                        case 300..<600:
-                            timeRemaining = 600
-                        case 600..<900:
-                            timeRemaining = 900
-                        case 900..<1200:
-                            timeRemaining = 1200
-                        case 1200..<1500:
-                            timeRemaining = 1500
-                        case 1500..<1800:
-                            timeRemaining = 1800
-                        default:
-                            timeRemaining = 0
+            
+                ZStack {
+                    Circle()
+                        .stroke(Color.gray.opacity(0.2), lineWidth: 10)
+                        .frame(width: 100, height: 100)
+                    
+                    Circle()
+                        .trim(from: 0, to: CGFloat(timeRemaining) / CGFloat(totalTime))
+                        .stroke(Color.blue, lineWidth: 10)
+                        .rotationEffect(.degrees(-90))
+                        .frame(width: 100, height: 100)
+                    
+                    
+                    Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
+                        .font(.system(size: 20, weight: .bold))
+                    
+                    VStack(spacing: 10) {
+                        Button {
+                            timeRemaining += 60
+                            totalTime += 60
+                        } label: {
+                            VStack{
+                                Image(systemName: "timer.square")
+                                    .font(.title)
+                                Text("+1m")
+                                    .font(.subheadline)
+                            }
                         }
-                    } label: {
-                        Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                            .font(.system(size: 20, weight: .bold))
+                        Button {
+                            timeRemaining += 180
+                            totalTime += 180
+                        } label: {
+                            VStack{
+                                Image(systemName: "timer.square")
+                                    .font(.title)
+                                Text("+3m")
+                                    .font(.subheadline)
+                            }
+                        }
+                        Button {
+                            timeRemaining += 300
+                            totalTime += 180
+                        } label: {
+                            VStack{
+                                Image(systemName: "timer.square")
+                                    .font(.title)
+                                Text("+5m")
+                                    .font(.subheadline)
+                            }
+                        }
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    Button {
-                        isRunning.toggle()
-                    } label: {
-                        Image(systemName: isRunning ? "pause" : "play.fill")
-                    }
+                    .offset(CGSize(width: 100.0, height: 00.0))
+                }
+                
+            
+            .offset(CGSize(width: 0.0, height: 0.0))
+            HStack {
+                Button {
+                    isRunning.toggle()
+                } label: {
+                    Image(systemName: isRunning ? "pause" : "play.fill")
+                        .font(.title)
+                }
+                Spacer()
+                Button {
+                    isRunning = false
+                    timeRemaining = 0
+                    totalTime = 0
+                } label: {
+                    Image(systemName: "stop.fill")
+                        .font(.title)
                 }
             }
+            .offset(CGSize(width: 0.0, height: 10.0))
+            .frame(width: 100)
             
         }
-        .frame(width: 100, height: 100)
+        .buttonStyle(PlainButtonStyle())
+        .frame(width: 230, height: 170)
         .padding()
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         .onReceive(timer) { _ in
@@ -107,6 +141,7 @@ struct ContentView: View {
                 }
             } else if isRunning {
                 isRunning = false
+                totalTime = 0
             }
         }
     }
