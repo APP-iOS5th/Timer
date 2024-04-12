@@ -29,7 +29,7 @@ class SoundManager {
     var player: AVAudioPlayer?
     
     func playSound() {
-        guard let url = Bundle.main.url(forResource: "Output", withExtension: "mov") else { return }
+        guard let url = Bundle.main.url(forResource: "output", withExtension: "mov") else { return }
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
@@ -65,7 +65,7 @@ struct ContentView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .foregroundStyle(.white)
-                        .position(x: torToisePosition , y:0)
+                        .offset(x: torToisePosition , y: 0)
                 }
             }
             .frame(width: 250, height: 20)
@@ -136,7 +136,9 @@ struct ContentView: View {
                     torToisePosition = -20
                 }
             } else if isRunning {
+                SoundManager.instance.playSound()
                 isRunning = false
+                
             }
         }
     }
