@@ -11,6 +11,7 @@
 		C1E141AC2BC8DA9F00F2BD09 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E141AB2BC8DA9F00F2BD09 /* ContentView.swift */; };
 		C1E141AE2BC8DAA000F2BD09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1E141AD2BC8DAA000F2BD09 /* Assets.xcassets */; };
 		C1E141B12BC8DAA000F2BD09 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1E141B02BC8DAA000F2BD09 /* Preview Assets.xcassets */; };
+		C1E141BE2BC917FD00F2BD09 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C1E141BC2BC917FD00F2BD09 /* background.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		C1E141AD2BC8DAA000F2BD09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1E141B02BC8DAA000F2BD09 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C1E141B22BC8DAA000F2BD09 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
+		C1E141BC2BC917FD00F2BD09 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = background.mp3; path = ../../../Downloads/background.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		C1E141A82BC8DA9F00F2BD09 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
+				C1E141BC2BC917FD00F2BD09 /* background.mp3 */,
 				C1E141A92BC8DA9F00F2BD09 /* TimerApp.swift */,
 				C1E141AB2BC8DA9F00F2BD09 /* ContentView.swift */,
 				C1E141AD2BC8DAA000F2BD09 /* Assets.xcassets */,
@@ -128,6 +131,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1E141B12BC8DAA000F2BD09 /* Preview Assets.xcassets in Resources */,
+				C1E141BE2BC917FD00F2BD09 /* background.mp3 in Resources */,
 				C1E141AE2BC8DAA000F2BD09 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
