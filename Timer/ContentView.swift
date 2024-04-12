@@ -64,10 +64,21 @@ struct ContentView: View {
                         .rotationEffect(.degrees(-90))
                         .frame(width: 100, height: 100)
                     
-                    
                     Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
                         .font(.system(size: 20, weight: .bold))
                     
+                    VStack {
+                        Image(systemName: "tortoise.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 20, height: 20)
+                            .scaleEffect(x: -1, y: 1)
+                            .offset(CGSize(width: 00.0, height: -10.0))
+                        Spacer()
+                    }
+                    .frame(width: 100, height: 100)
+                    .rotationEffect(.degrees(totalTime != 0 ? Double(timeRemaining) / Double(totalTime) * 360 : 0.0))
+
                     VStack(spacing: 10) {
                         Button {
                             timeRemaining += 60
@@ -78,36 +89,38 @@ struct ContentView: View {
                                     .font(.title)
                                 Text("+1m")
                                     .font(.subheadline)
-                            }
-                        }
-                        Button {
-                            timeRemaining += 180
-                            totalTime += 180
-                        } label: {
-                            VStack{
-                                Image(systemName: "timer.square")
-                                    .font(.title)
-                                Text("+3m")
-                                    .font(.subheadline)
+                                    .fontWeight(.bold)
                             }
                         }
                         Button {
                             timeRemaining += 300
-                            totalTime += 180
+                            totalTime += 300
                         } label: {
                             VStack{
                                 Image(systemName: "timer.square")
                                     .font(.title)
                                 Text("+5m")
                                     .font(.subheadline)
+                                    .fontWeight(.bold)
                             }
+                        }
+                        Button {
+                            if timeRemaining >= 60 {
+                                timeRemaining -= 60
+                                totalTime -= 60
+                            }
+                        } label: {
+                            VStack{
+                                Image(systemName: "timer.square")
+                                    .font(.title)
+                                Text("-1m")
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }.foregroundColor(.red)
                         }
                     }
                     .offset(CGSize(width: 100.0, height: 00.0))
                 }
-                
-            
-            .offset(CGSize(width: 0.0, height: 0.0))
             HStack {
                 Button {
                     isRunning.toggle()
@@ -127,12 +140,11 @@ struct ContentView: View {
             }
             .offset(CGSize(width: 0.0, height: 10.0))
             .frame(width: 100)
-            
         }
         .buttonStyle(PlainButtonStyle())
         .frame(width: 230, height: 170)
         .padding()
-        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
+        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: isRunning ? true : false))
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
