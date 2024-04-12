@@ -73,7 +73,7 @@ struct ContentView: View {
                         .font(.system(size: 60, weight: .light))
                         .tint(.black)
                     
-                    HStack(spacing: 30){
+                    HStack(spacing: 10){
                         Button(action: {
                             if 0 <= timeRemaining && timeRemaining <= (maxMinute-1) * 60 {
                                 timeRemaining += 60
@@ -88,6 +88,17 @@ struct ContentView: View {
                                 .tint(.black)
                         }
                         Button(action: {
+                            if timeRemaining <= (maxMinute-1) * 60 + 30{
+                                timeRemaining += 30
+                            }
+                        }) {
+                            Image(systemName: "goforward.30")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .tint(.black)
+                        }
+                        
+                        Button(action: {
                             switch(timeRemaining){
                             case ..<60:
                                 timeRemaining = 0
@@ -96,6 +107,16 @@ struct ContentView: View {
                             }
                         }) {
                             Image(systemName: "minus.circle.fill")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .tint(.black)
+                        }
+                        Button(action: {
+                            if 30 <= timeRemaining {
+                                timeRemaining -= 30
+                            }
+                        }) {
+                            Image(systemName: "gobackward.30")
                                 .resizable()
                                 .frame(width: 20, height: 20)
                                 .tint(.black)
