@@ -1,6 +1,24 @@
 import SwiftUI
 import AVFoundation
 
+struct AlwaysOnTopView: NSViewRepresentable {
+    let window: NSWindow
+    let isAlwaysOnTop: Bool
+    
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        return view
+    }
+    
+    func updateNSView(_ nsView: NSView, context: Context) {
+        if isAlwaysOnTop {
+            window.level = .floating
+        } else {
+            window.level = .normal
+        }
+    }
+}
+
 class SoundManager {
     static let instance = SoundManager()
     var player: AVAudioPlayer?
@@ -39,7 +57,7 @@ struct ContentView: View {
                 
                 VStack {
                     Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                        .font(.system(size: 25, weight: .bold))
+                        .font(.system(size: 30, weight: .bold))
                     
                         Button {
                             timeRemaining = 0
@@ -55,6 +73,7 @@ struct ContentView: View {
                     TextField("분을 입력", text: $userInput) // 입력
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding([.trailing, .leading])
+                        .frame(width: 101)
                     
                     Button {
                         if isRunning {
@@ -75,6 +94,7 @@ struct ContentView: View {
             }
         }
         .frame(width: 150, height: 150)
+        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         .padding()
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
