@@ -11,6 +11,7 @@
 		3B2F09EB2BC8BFAE0084D707 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2F09EA2BC8BFAE0084D707 /* ContentView.swift */; };
 		3B2F09ED2BC8BFAF0084D707 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B2F09EC2BC8BFAF0084D707 /* Assets.xcassets */; };
 		3B2F09F02BC8BFAF0084D707 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B2F09EF2BC8BFAF0084D707 /* Preview Assets.xcassets */; };
+		3B2F09F82BC8DFC90084D707 /* Coin 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B2F09F72BC8DFC90084D707 /* Coin 1.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		3B2F09EC2BC8BFAF0084D707 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B2F09EF2BC8BFAF0084D707 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3B2F09F12BC8BFAF0084D707 /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
+		3B2F09F72BC8DFC90084D707 /* Coin 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Coin 1.mp3"; path = "../../../Music/Music/Media.localized/Music/Unknown Artist/Unknown Album/Coin 1.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				3B2F09EA2BC8BFAE0084D707 /* ContentView.swift */,
 				3B2F09EC2BC8BFAF0084D707 /* Assets.xcassets */,
 				3B2F09F12BC8BFAF0084D707 /* Timer.entitlements */,
+				3B2F09F72BC8DFC90084D707 /* Coin 1.mp3 */,
 				3B2F09EE2BC8BFAF0084D707 /* Preview Content */,
 			);
 			path = Timer;
@@ -129,6 +132,7 @@
 			files = (
 				3B2F09F02BC8BFAF0084D707 /* Preview Assets.xcassets in Resources */,
 				3B2F09ED2BC8BFAF0084D707 /* Assets.xcassets in Resources */,
+				3B2F09F82BC8DFC90084D707 /* Coin 1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
