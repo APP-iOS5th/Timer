@@ -9,24 +9,21 @@ import SwiftUI
 import Combine
 
 struct TimerView: View {
-    private let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
-    @State private var initialTime = 0
-    @State private var remainingTime = 0
-    @State private var timerState: TimerState = .stop
+    @State private var viewModel = TimerViewModel(initialTime: 30, remainingTime: 30)
     
     var body: some View {
         ZStack {
-            TimerTickView(totalTime: initialTime, remainingTime: remainingTime)
+            TimerTickView(totalTime: viewModel.initialTime, remainingTime: viewModel.remainingTime)
             TimerTickView()
                 .opacity(0.3)
             VStack {
-                RemainingTimeLabel(remainingTime: remainingTime)
-                InitialTimeLabel(time: initialTime)
+                RemainingTimeLabel(remainingTime: viewModel.remainingTime)
+                InitialTimeLabel(time: viewModel.initialTime)
             }
             
             HStack {
                 Button {
-                    timerState = .stop
+                    viewModel.stop()
                 } label: {
                     Image(systemName: "x.circle.fill")
                         .foregroundStyle(.gray)
@@ -37,12 +34,18 @@ struct TimerView: View {
                 Spacer()
                 
                 Button {
-                    timerState = .run
+                    viewModel.timerState == .run
+                    ? viewModel.pause()
+                    : viewModel.start()
                 } label: {
-                    Image(systemName: "play.circle.fill")
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(.black, .accent)
-                        .font(.system(size: 28))
+                    Image(
+                        systemName: viewModel.timerState == .run
+                        ? "pause.circle.fill"
+                        : "play.circle.fill"
+                    )
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(.black, .accent)
+                    .font(.system(size: 28))
                 }
                 .buttonStyle(.plain)
             }
@@ -50,13 +53,6 @@ struct TimerView: View {
         }
         .frame(width: 200, height: 200)
         .background(Color.black)
-        .onReceive(timer) { _ in
-            if timerState == .run && remainingTime > 0 {
-                remainingTime -= 1
-            } else if timerState == .run {
-                timerState = .stop
-            }
-        }
     }
 }
 
