@@ -66,12 +66,6 @@ struct TimerView: View {
 
 #Preview {
     TimerView(
-        TimerInfo(time: 120)
+        TimerInfo(time: 10)
     )
-}
-
-extension CharacterSet {
-    func contains(_ character: Character) -> Bool {
-        character.unicodeScalars.allSatisfy(contains(_:))
-    }
 }

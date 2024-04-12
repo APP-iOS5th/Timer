@@ -17,6 +17,7 @@
 		8315A5C62BC8FEAC00E2CEBB /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8315A5C52BC8FEAC00E2CEBB /* TimerViewModel.swift */; };
 		83800BEE2BC91E15004A1830 /* TimerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83800BED2BC91E15004A1830 /* TimerInfo.swift */; };
 		83800BF02BC91EB9004A1830 /* TimerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83800BEF2BC91EB9004A1830 /* TimerListViewModel.swift */; };
+		83800BF62BC928BD004A1830 /* CharacterSet+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83800BF52BC928BD004A1830 /* CharacterSet+.swift */; };
 		83D6F2BA2BC8FB92004D2D48 /* TimerTickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6F2B92BC8FB92004D2D48 /* TimerTickView.swift */; };
 		83D6F2BC2BC8FBBF004D2D48 /* InitialTimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6F2BB2BC8FBBF004D2D48 /* InitialTimeLabel.swift */; };
 		83D6F2BF2BC8FD01004D2D48 /* RemainingTimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6F2BE2BC8FD01004D2D48 /* RemainingTimeLabel.swift */; };
@@ -37,6 +38,7 @@
 		8315A5C52BC8FEAC00E2CEBB /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		83800BED2BC91E15004A1830 /* TimerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerInfo.swift; sourceTree = "<group>"; };
 		83800BEF2BC91EB9004A1830 /* TimerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListViewModel.swift; sourceTree = "<group>"; };
+		83800BF52BC928BD004A1830 /* CharacterSet+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+.swift"; sourceTree = "<group>"; };
 		83D6F2B92BC8FB92004D2D48 /* TimerTickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTickView.swift; sourceTree = "<group>"; };
 		83D6F2BB2BC8FBBF004D2D48 /* InitialTimeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTimeLabel.swift; sourceTree = "<group>"; };
 		83D6F2BE2BC8FD01004D2D48 /* RemainingTimeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemainingTimeLabel.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 		37FC17AC2BC8BFA9006AC8A9 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
+				83800BF42BC928A6004A1830 /* Extensions */,
 				8315A5C22BC8FE4500E2CEBB /* Model */,
 				8315A5C12BC8FE3100E2CEBB /* ViewModel */,
 				83D6F2B82BC8FB83004D2D48 /* View */,
@@ -120,6 +123,14 @@
 				83D6F2BB2BC8FBBF004D2D48 /* InitialTimeLabel.swift */,
 			);
 			path = Label;
+			sourceTree = "<group>";
+		};
+		83800BF42BC928A6004A1830 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				83800BF52BC928BD004A1830 /* CharacterSet+.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		83D6F2B82BC8FB83004D2D48 /* View */ = {
@@ -221,6 +232,7 @@
 				8315A5C42BC8FE4D00E2CEBB /* TimerState.swift in Sources */,
 				8315A5BE2BC8FDBA00E2CEBB /* TimerListView.swift in Sources */,
 				83D6F2BA2BC8FB92004D2D48 /* TimerTickView.swift in Sources */,
+				83800BF62BC928BD004A1830 /* CharacterSet+.swift in Sources */,
 				83800BF02BC91EB9004A1830 /* TimerListViewModel.swift in Sources */,
 				83800BEE2BC91E15004A1830 /* TimerInfo.swift in Sources */,
 				37FC17B02BC8BFA9006AC8A9 /* ContentView.swift in Sources */,
