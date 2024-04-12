@@ -8,12 +8,31 @@
 import SwiftUI
 import AVFoundation
 
+struct AlwaysOnTopView: NSViewRepresentable {
+    let window: NSWindow
+    let isAlwaysOnTop: Bool
+    
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        return view
+    }
+    
+    func updateNSView(_ nsView: NSView, context: Context) {
+        if isAlwaysOnTop {
+            window.level = .floating
+        }
+        else {
+            window.level = .normal
+        }
+    }
+}
+
 class SoundManger {
     static let instance = SoundManger()
     var player: AVAudioPlayer?
     
     func playSound() {
-        guard let url  = Bundle.main.url(forResource: "Coin 1" , withExtension: "mov")
+        guard let url  = Bundle.main.url(forResource: "Coin 1" , withExtension: "mp3")
         else { return }
         
         do {
@@ -80,10 +99,14 @@ struct ContentView: View {
         }
         .frame(width: 100, height: 100)
         .padding()
+        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
         //타이머 동작하는 클로저
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
+                if timeRemaining <= 5 {
+                    NSSound.beep()
+                }
             }
             else if isRunning {
                 isRunning = false
