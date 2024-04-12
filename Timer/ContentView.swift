@@ -34,7 +34,7 @@ struct ContentView: View {
     
     func speech(_ speak: String) {
         let utterance = AVSpeechUtterance(string: speak)
-        utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         self.speechSynthesizer.speak(utterance)
     }
     
@@ -60,10 +60,10 @@ struct ContentView: View {
                     .font(.system(size: 20, weight: .bold))
                     Picker("", selection: $initialMinutes, content: {
                         if isRunning {
-                            Text("Running")
+                            Text("Running").tag("")
                         } else {
-                            ForEach([1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40,45,50,55,60], id:\.self) { index in
-                                Text("\(index)").tag("\(index)")
+                            ForEach([1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40,45,50,55,60], id:\.self) {
+                                Text("\($0)")
                             }
                         }
                     })
@@ -81,13 +81,12 @@ struct ContentView: View {
         .onReceive(timer) { _ in
             if isRunning && remainingSeconds > 0 {
                 remainingSeconds -= 1
-                if remainingSeconds < 4 {
-                    print("\(remainingSeconds)")
-                    self.speech("\(remainingSeconds)")
-                }
+            }
+            if remainingSeconds < 4 && remainingSeconds > 0 {
+                speech("\(remainingSeconds)")
             }
             if remainingSeconds == 0 && isRunning {
-                self.speech("그만")
+                speech("Stop")
                 remainingSeconds = initialMinutes * 60
                 isRunning = false
             }
