@@ -11,6 +11,7 @@
 		15C263EB2BC8BFE70015ACCE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C263EA2BC8BFE70015ACCE /* ContentView.swift */; };
 		15C263ED2BC8BFE90015ACCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15C263EC2BC8BFE90015ACCE /* Assets.xcassets */; };
 		15C263F02BC8BFE90015ACCE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15C263EF2BC8BFE90015ACCE /* Preview Assets.xcassets */; };
+		15C263F82BC8D2CD0015ACCE /* Beep.mov in Resources */ = {isa = PBXBuildFile; fileRef = 15C263F72BC8D2CD0015ACCE /* Beep.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,8 @@
 		15C263EC2BC8BFE90015ACCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		15C263EF2BC8BFE90015ACCE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		15C263F12BC8BFE90015ACCE /* Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timer.entitlements; sourceTree = "<group>"; };
+		15C263F72BC8D2CD0015ACCE /* Beep.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Beep.mov; path = ../../../../Downloads/Beep.mov; sourceTree = "<group>"; };
+		15C263F92BC8D2DA0015ACCE /* Beep.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Beep.mov; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +57,9 @@
 			children = (
 				15C263E82BC8BFE70015ACCE /* TimerApp.swift */,
 				15C263EA2BC8BFE70015ACCE /* ContentView.swift */,
-				15C263EC2BC8BFE90015ACCE /* Assets.xcassets */,
 				15C263F12BC8BFE90015ACCE /* Timer.entitlements */,
+				15C263EC2BC8BFE90015ACCE /* Assets.xcassets */,
+				15C263F92BC8D2DA0015ACCE /* Beep.mov */,
 				15C263EE2BC8BFE90015ACCE /* Preview Content */,
 			);
 			path = Timer;
@@ -64,6 +68,7 @@
 		15C263EE2BC8BFE90015ACCE /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				15C263F72BC8D2CD0015ACCE /* Beep.mov */,
 				15C263EF2BC8BFE90015ACCE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -128,6 +133,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15C263F02BC8BFE90015ACCE /* Preview Assets.xcassets in Resources */,
+				15C263F82BC8D2CD0015ACCE /* Beep.mov in Resources */,
 				15C263ED2BC8BFE90015ACCE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
