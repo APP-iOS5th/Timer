@@ -46,7 +46,7 @@ struct ContentView: View {
     
     @State private var isRunning = false // 타이머를 클릭해서 작동중인 판단하는 변수
     @State private var isStopping = false
-    @State private var timeRemaining = 0
+    @State private var timeRemaining = 15
     @State private var runString = "시작"
     @State private var pauseString = "정지"
     @State private var resetString = "리셋"

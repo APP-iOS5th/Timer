@@ -80,7 +80,7 @@ struct ContentView: View {
                         }) {
                             Image(systemName: "plus.circle.fill")
                                 .resizable()
-                                .frame(width: 20, height: 20)
+                                .frame(width: 25, height: 25)
                                 .tint(.black)
                         }
                         Button(action: {
@@ -93,16 +93,16 @@ struct ContentView: View {
                         }) {
                             Image(systemName: "minus.circle.fill")
                                 .resizable()
-                                .frame(width: 20, height: 20)
+                                .frame(width: 25, height: 25)
                                 .tint(.black)
                         }
                     }
                 }
             }
         }
-        .frame(width: 50, height: 200)
+        .frame(width: 50, height: 170)
         .padding()
-        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
+        
         //view에서 지정된 publisher가 emit한 데이터를 감지할 때 수행할 작업을 추가
         .onReceive(timer, perform: { _ in
             if isRunning && timeRemaining > 0 {
