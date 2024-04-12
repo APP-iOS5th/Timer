@@ -20,7 +20,10 @@ struct TimerView: View {
     
     var body: some View {
         ZStack {
-            TimerTickView(totalTime: viewModel.initialTime, remainingTime: viewModel.remainingTime)
+            TimerTickView(
+                totalTime: viewModel.initialTime,
+                remainingTime: viewModel.remainingTime
+            )
             TimerTickView()
                 .opacity(0.3)
             VStack {

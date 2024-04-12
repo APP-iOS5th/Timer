@@ -29,7 +29,7 @@ struct TimerTickView: View {
             )
             .stroke(
                 style: .init(
-                    lineWidth: 10,
+                    lineWidth: 15,
                     dash: [1, 3]
                 )
             )
