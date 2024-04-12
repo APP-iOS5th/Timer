@@ -108,8 +108,10 @@ struct ContentView: View {
                 .frame(height: 30)
             HStack{
                 Button{
-                    timerSetFunc(maxtime: 60 * 3, time: 60 * 3, timeColor: .green)
-                    isRunning = true
+                    if !isRunning{
+                        timerSetFunc(maxtime: 60 * 3, time: 60 * 3, timeColor: .green)
+                        isRunning = true
+                    }
                 } label: {
                     Text("Easy")
                         .font(.caption)
@@ -119,8 +121,10 @@ struct ContentView: View {
                 
                 
                 Button{
-                    timerSetFunc(maxtime: 60 * 5, time: 60 * 5, timeColor: .yellow)
-                    isRunning = true
+                    if !isRunning{
+                        timerSetFunc(maxtime: 60 * 5, time: 60 * 5, timeColor: .yellow)
+                        isRunning = true
+                    }
                 } label: {
                     Text("Normal")
                         .font(.caption)
@@ -129,8 +133,10 @@ struct ContentView: View {
                 .cornerRadius(10)
                 
                 Button{
-                    timerSetFunc(maxtime: 60 * 10, time: 60 * 10, timeColor: .red)
-                    isRunning = true
+                    if !isRunning{
+                        timerSetFunc(maxtime: 60 * 10, time: 60 * 10, timeColor: .red)
+                        isRunning = true
+                    }
                 } label: {
                     Text("Hard")
                         .font(.caption)
