@@ -39,7 +39,7 @@ class SoundManager {
             player = try AVAudioPlayer(contentsOf: url)
             player?.play()
         } catch let error {
-            print("재생하는데 오류가 발생했습니다. \(error.localizedDescription)")
+            print("재생하는데 오류가 발생했습니다 \(error.localizedDescription)")
         }
     }
 }
