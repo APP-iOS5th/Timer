@@ -78,6 +78,9 @@ struct ContentView: View {
                             if 0 <= timeRemaining && timeRemaining <= (maxMinute-1) * 60 {
                                 timeRemaining += 60
                             }
+                            else if  ((maxMinute-1) * 60) <= timeRemaining {
+                                timeRemaining = maxMinute * 60
+                            }
                         }) {
                             Image(systemName: "plus.circle.fill")
                                 .resizable()
