@@ -57,6 +57,7 @@ struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
     @State var selectedView = 1
+    @State private var currentTimer: Double = 60.0
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -97,14 +98,14 @@ struct ContentView: View {
                         
                         VStack{
                             HStack{
-                            NavigationLink{
-                                ContentView()
-                            } label : {
+                                NavigationLink{
+                                    ContentView()
+                                } label : {
                                     Image("SettingIcon")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(width: 20, height: 20)
-                                    Text("Timer")
+                                        .frame(width: 15, height: 20)
+                                    Text(" Timer ")
                                         .foregroundStyle(.black)
                                         .tag(1)
                                     
@@ -115,65 +116,111 @@ struct ContentView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 20, height: 20)
-                                        Text("Cookies")
-                                            .foregroundStyle(.black)
+                                        Text(" Cookies ")
+                                            .foregroundStyle(Color(hex: "#8E959F"))
                                             .tag(2)
                                     }
                                 }
-                                
-                                
                             }
                         }
-                        .accentColor(.black)
+                        .accentColor(Color(hex: "#8E959F"))
                         Spacer()
-                       
-                        
-                    
                     }
                 }
             }
+            
             .frame(width: 198, height: 242)
             .background(Color(hex: "#EDEFF3"))
             .ignoresSafeArea()
         }
     }
-}
-
-
-struct PresetModel: Identifiable {
-    var id: UUID = UUID()
-    let timerDuration: String
-}
-
-struct PresetListView: View {
     
-    let presets: [PresetModel] = [
-        PresetModel(timerDuration: "3:00"),
-        PresetModel(timerDuration: "5:00"),
-        PresetModel(timerDuration: "7:00"),
-        PresetModel(timerDuration: "10:00"),
-    ]
+    func runTimer() {
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            currentTimer -= 1
+            if currentTimer < 0 {
+                currentTimer = 60
+                timer.invalidate()
+            }
+        }
+        
+    }
     
     
-    var body: some View {
-        List(presets) { preset in
-            HStack {
-                Text("\(preset.timerDuration)")
-                Spacer()
-                Button(action: {
-                    print("Started \(preset.timerDuration)")
-                }, label: {
-                    Text("Start")
-                })
+    struct PresetModel: Identifiable {
+        var id: UUID = UUID()
+        let timerDuration: String
+    }
+    
+    struct PresetListView: View {
+        
+        let presets: [PresetModel] = [
+            PresetModel(timerDuration: "3:00"),
+            PresetModel(timerDuration: "5:00"),
+            PresetModel(timerDuration: "7:00"),
+            PresetModel(timerDuration: "10:00"),
+        ]
+        
+        
+        var body: some View {
+            List(presets) { preset in
+                HStack {
+                    Text("\(preset.timerDuration)")
+                        .font(Font.system(size: 20))
+                        .fontWeight(.medium)
+                    Spacer()
+                    Button(action: {
+                        print("Started \(preset.timerDuration)")
+                    }, label: {
+                        Text("시작")
+                    })
+                }
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .automatic) {
+                    NavigationLink(destination: PresetAddView()) {
+                        Image(systemName: "plus")
+                    }
+                }
             }
             
         }
         
-        
     }
     
+    struct PresetAddView: View {
+        @State private var minute: Int = 0
+        @State private var second: Int = 0
+        
+        var body: some View {
+            VStack {
+                HStack{
+                    Picker(selection: $minute) {
+                        ForEach(0...60, id: \.self) { min in
+                            Text("\(minute)분")
+                        }
+                    } label: {
+                        Text("\(minute)분")
+                    }
+                    Picker(selection: $minute) {
+                        ForEach(0...60, id: \.self) { min in
+                            Text("\(second)초")
+                        }
+                    } label: {
+                        Text("\(second)초")
+                    }
+                }
+                .frame(height: 80)
+                
+                Button(action: {
+                    
+                }, label: {
+                    Text("타이머 저장")
+                })
+            }
+        }
+    }
 }
-
 
 #Preview {
     ContentView()
