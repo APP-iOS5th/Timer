@@ -71,10 +71,10 @@ struct ContentView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30, height: 30)
                         Spacer()
-                        Text("0:00")
-                            .fontWeight(.regular)
-                            .font(Font.system(size: 40))
+                        Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
+                            .font(.system(size: 40, weight: .regular))
                             .foregroundColor(.black)
+                            .frame(maxWidth:.infinity, alignment: .trailing)
                     }
                     .padding()
                     Spacer()
@@ -83,19 +83,48 @@ struct ContentView: View {
                     VStack{
                         ZStack {
                             Circle()
+                                .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
                                 .stroke(Color.black, lineWidth: 35)
-                                .fill(.clear)
+                                .rotationEffect(.degrees(-90))
+                                //.fill(.clear)
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 70)
-                            Image(systemName: "pause")
-                                .font(Font.system(size: 20))
-                                .fontWeight(.black)
-                                .foregroundStyle(.black)
+                            
+                            Button {
+                                switch timeRemaining {
+                                case 0..<180:
+                                    timeRemaining = 180
+                                case 180..<300:
+                                    timeRemaining = 300
+                                case 300..<420:
+                                    timeRemaining = 420
+                                case 300..<600:
+                                    timeRemaining = 600
+                                case 600..<900:
+                                    timeRemaining = 900
+                                case 900..<1200:
+                                    timeRemaining = 1200
+                                case 1200..<1500:
+                                    timeRemaining = 1500
+                                case 1500..<1800:
+                                    timeRemaining = 1800
+                                default:
+                                    timeRemaining = 0
+                                }
+                                
+                                isRunning.toggle()
+                            } label: {
+                                Image(systemName: isRunning ? "pause" : "play.fill")
+                                    .buttonStyle(.borderless)
+                                    .font(Font.system(size: 20))
+                                    .fontWeight(.black)
+                                    .foregroundStyle(.black)
+                            }
                         }
                         Spacer()
                         Spacer()
                         Spacer()
-                        
+                
                         VStack{
                             HStack{
                                 NavigationLink{
