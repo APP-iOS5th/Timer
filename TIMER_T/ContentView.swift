@@ -56,6 +56,7 @@ class SoundManager {
 struct ContentView: View {
     @State private var isRunning = false
     @State private var timeRemaining = 0
+    @State var selectedView = 1
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -88,11 +89,34 @@ struct ContentView: View {
                                 .foregroundStyle(.black)
                         }
                         VStack{
+                            TabView(selection: $selectedView) {
+                                Text("Timer")
+                                    .foregroundColor(.black)
+                                    
+                                    .tabItem {
+                                        Text("Timer")
+                                            .foregroundColor(.black)
+                                        Image("SettingIcon")
+                                        
+                                    }.tag(1)
+                                Image("Cookies Button")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 20, height: 20)
+                                    .foregroundStyle(.black)
+                                    .tabItem {
+                                        
+                                        Text("Cookies")
+                                    }.tag(2)
+                            }
+                            
+                            /*
                             NavigationLink{
                                 PresetListView()
                             } label: {
                                 Text("Show Presets")
                             }
+                             */
                         }
                     }
                 }
