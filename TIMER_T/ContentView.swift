@@ -60,77 +60,80 @@ struct ContentView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
-            Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                .font(.system(size: 40, weight: .regular))
-                .foregroundColor(.black)
-                .frame(maxWidth:.infinity, alignment: .trailing)
-            
+        NavigationView {
             ZStack {
-                Circle()
-                    .fill(Color.black)
-                    .frame(width: 100, height: 100)
-                
-                Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining) / (30 * 60))
-                    .stroke(Color.blue, lineWidth: 10)
-                    .rotationEffect(.degrees(-90))
-                   
-                
                 VStack {
-                    Button {
-                        switch timeRemaining {
-                        case 0..<180:
-                            timeRemaining = 180
-                        case 180..<300:
-                            timeRemaining = 300
-                        case 300..<420:
-                            timeRemaining = 420
-                        case 300..<600:
-                            timeRemaining = 600
-                        case 600..<900:
-                            timeRemaining = 900
-                        case 900..<1200:
-                            timeRemaining = 1200
-                        case 1200..<1500:
-                            timeRemaining = 1500
-                        case 1500..<1800:
-                            timeRemaining = 1800
-                        default:
-                            timeRemaining = 0
+                    HStack {
+                        Image("PieceOfCookieIcon")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                        Spacer()
+                        Text("0:00")
+                            .fontWeight(.medium)
+                            .font(Font.system(size: 40))
+                            .foregroundColor(.black)
+                    }
+                    .padding()
+                    VStack{
+                        ZStack {
+                            Circle()
+                                .stroke(Color.black, lineWidth: 35)
+                                .fill(.clear)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 70)
+                            Image(systemName: "pause")
+                                .font(Font.system(size: 20))
+                                .fontWeight(.black)
+                                .foregroundStyle(.black)
                         }
-                    } label: {
-                        Text("\(timeRemaining / 60):\(String(format: "%02d", timeRemaining % 60))")
-                            .font(.system(size: 20, weight: .bold))
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    Button {
-                        isRunning.toggle()
-                    } label: {
-                        Image(systemName: isRunning ? "pause" : "play.fill")
+                        VStack{
+                            NavigationLink{
+                                PresetListView()
+                            } label: {
+                                Text("Show Presets")
+                            }
+                        }
                     }
                 }
-            }
-            
-        }
-        
-        .frame(width: 198, height: 242)
-        .background(Color(hex: "#EDEFF3"))
-        .ignoresSafeArea()
-        .padding()
-        .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: true))
-        .onReceive(timer) { _ in
-            if isRunning && timeRemaining > 0 {
-                timeRemaining -= 1
-                if timeRemaining <= 10 {
-                    NSSound.beep()
-                }
-            } else if isRunning {
-                isRunning = false
+                    .frame(width: 198, height: 242)
+                    .background(Color(hex: "#EDEFF3"))
+                    .ignoresSafeArea()
             }
         }
     }
-}
+                    
+            }
+            struct PresetModel: Identifiable {
+                var id: UUID = UUID()
+                let timerDuration: String
+            }
+            
+            struct PresetListView: View {
+                
+                let presets: [PresetModel] = [
+                    PresetModel(timerDuration: "3:00"),
+                    PresetModel(timerDuration: "5:00"),
+                    PresetModel(timerDuration: "7:00"),
+                    PresetModel(timerDuration: "10:00"),
+                ]
+                
+                var body: some View {
+                    List(presets) { preset in
+                        HStack {
+                            Text("\(preset.timerDuration)")
+                            Spacer()
+                            Button(action: {
+                                print("Started \(preset.timerDuration)")
+                            }, label: {
+                                Text("Start")
+                            })
+               
+                }
+            }
+        }
+    }
+
 #Preview {
     ContentView()
 }
