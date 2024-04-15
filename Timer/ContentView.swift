@@ -40,10 +40,12 @@ class SoundManager {
 
 struct ContentView: View {
     @State private var isRunning = false
-    @State private var timeRemaining = 10
+    @State private var timeRemaining = 60
     @State private var isOnTop = true
-    @State private var startTime = 10
+    @State private var startTime = 60
     @State var widthValue: CGFloat = 100
+    @State var completionDate = Date.now
+    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -66,32 +68,28 @@ struct ContentView: View {
                     isRunning.toggle()
                     timeRemaining = startTime
                     widthValue = 100
+                    updateCompletionDate(remainTime: Double(timeRemaining))
                 } label: {
                     if isRunning {
-                        Image(systemName: "return")
+                        Image(systemName: "repeat")
                     }
                 }.buttonStyle(PlainButtonStyle())
             }
-            Spacer()
             ZStack {
                 HStack(){
                     RoundedRectangle(cornerRadius: 10)
                         .fill(widthValue <= 30 ? Color.red : widthValue <= 50 ? Color.yellow :Color.green)
                         .frame(height: 50)
-                        .animation(.easeInOut(duration: 1.5), value: widthValue)
+                        .animation(.easeInOut(duration: 0.5), value: widthValue)
                         .frame(width: widthValue)
                         .frame(maxWidth:.infinity, alignment: .leading)
                         .offset(CGSize(width: 4, height: -1))
                 }
-                
                 Image(systemName: "battery.0percent")
                     .resizable()
                     .frame(width: 120, height: 60)
                     .foregroundColor(.white)
-                
                 VStack {
-                    
-                    
                     Button {
                         switch timeRemaining {
                         case 0..<180:
@@ -121,6 +119,7 @@ struct ContentView: View {
                         default:
                             timeRemaining = 0
                         }
+                        updateCompletionDate(remainTime: Double(timeRemaining))
                         widthValue = timeRemaining > 0 ? 100 : 0
                         
                     } label: {
@@ -132,8 +131,8 @@ struct ContentView: View {
                     .buttonStyle(PlainButtonStyle())
                 }
             }
-            
-            
+            Text(completionDate, format: .dateTime.hour().minute())
+                .font(.title)
         }
         .frame(width: 100, height: 100)
         .padding()
@@ -153,6 +152,10 @@ struct ContentView: View {
                 timeRemaining = startTime
             }
         }
+    }
+    
+    func updateCompletionDate(remainTime: Double) {
+        completionDate = Date.now.addingTimeInterval(remainTime)
     }
 }
 
