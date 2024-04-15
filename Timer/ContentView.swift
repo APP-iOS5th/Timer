@@ -32,8 +32,7 @@ class SoundManger {
     var player: AVAudioPlayer?
     
     func playSound() {
-        guard let url  = Bundle.main.url(forResource: "Coin 1" , withExtension: "mp3")
-        else { return }
+        guard let url = Bundle.main.url(forResource: "ㅊ", withExtension: "mp3") else { return }
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
@@ -60,7 +59,7 @@ struct ContentView: View {
                     Text("🦍").font(.system(size: 13)).tag("🦍")
                     Text("🐈").font(.system(size: 13)).tag("🐈")
                     Text("🐕").font(.system(size: 13)).tag("🐕")
-
+                    
                 }
                 .frame(width: 160)
             Spacer()
@@ -98,7 +97,6 @@ struct ContentView: View {
                     } label: {
                         Text("\(timeRemaining/60) : \(String(format: "%02d", timeRemaining % 60))")
                             .font(.system(size:20, weight: .regular))
-
                     }
                     .buttonStyle(.borderless)
                     
@@ -113,9 +111,7 @@ struct ContentView: View {
                         Text("Reset")
                     }
                 }
-                
             }
-
         }
         .frame(width: 200, height: 200)
         .padding()
@@ -139,7 +135,6 @@ struct ContentView: View {
                   dismissButton: .default(Text("OK"))
             )
         })
-
     }
 }
 
