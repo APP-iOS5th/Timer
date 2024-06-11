@@ -136,11 +136,15 @@ struct ContentView: View {
         }
         .frame(width: 100, height: 100)
         .padding()
+        .onChange(of: isRunning) {
+            isOnTop = isRunning
+            updateCompletionDate(remainTime: Double(timeRemaining))
+        }
         .background(AlwaysOnTopView(window: NSApplication.shared.windows.first!, isAlwaysOnTop: isOnTop))
         .onReceive(timer) { _ in
             if isRunning && timeRemaining > 0 {
                 timeRemaining -= 1
-                if widthValue >= 0{
+                if widthValue > 0 && startTime > 0 {
                     widthValue -= 100 / CGFloat(startTime)
                 }
                 if timeRemaining <= 10 {
